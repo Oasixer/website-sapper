@@ -1,6 +1,5 @@
 <script>
   import Header from '../resume/components/Header.svelte';
-  import { faFileDownload } from '@fortawesome/free-solid-svg-icons/faFileDownload';
   
   export let bg_color;
   export let height=undefined;

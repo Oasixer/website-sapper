@@ -1,7 +1,8 @@
 <script>
   export let bg_color;
   export let height=undefined;
-  import Icon from 'fa-svelte';
+  /* import Icon from 'fa-svelte/src/Icon.svelte';//'fa-svelte'; */
+  import Fa from 'svelte-fa';
   import { faFileDownload } from '@fortawesome/free-solid-svg-icons/faFileDownload';
   
   /* let src_uw = './images/uw.png'; */
@@ -72,7 +73,7 @@
   <h1>Resume</h1>
   <div class='row'>
     <a href='./Kaelan_Resume_2020.pdf' download>
-    <p class="iconContainer"><Icon icon={faFileDownload}/></p>
+    <p class="iconContainer"><Fa icon={faFileDownload}/></p>
     <p>Download</p>
   </div>
 </div>
