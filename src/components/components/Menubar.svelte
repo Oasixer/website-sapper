@@ -76,6 +76,7 @@
     font-size: 22px;
     font-family: "Open Sans", sans-serif;
     margin: 0;
+    padding: 9px;
   }
 
   button:active{

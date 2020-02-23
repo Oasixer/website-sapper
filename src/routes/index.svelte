@@ -5,6 +5,7 @@
   import Contact from '../components/contact/Contact.svelte';
   import Menubar from '../components/components/Menubar.svelte';
   import WorkExperiencePage from '../components/resume/WorkExperiencePage.svelte';
+  import ResumePage from '../components/resume/ResumePage.svelte';
   import SkillsPage from '../components/resume/SkillsPage.svelte';
   import BackToTop from '../components/components/BackToTop.svelte';
 

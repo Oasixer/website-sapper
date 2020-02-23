@@ -51,6 +51,8 @@
     display: flex;
     flex-flow: row nowrap;
     font-size: 30px;
+    color: #0078b4;
+    text-decoration: none;
   }
 
   p.iconContainer{
