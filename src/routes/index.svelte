@@ -3,7 +3,7 @@
   /* import About from './about/About.svelte'; */
   /* import Portfolio from './portfolio/Portfolio.svelte'; */
   /* import Contact from './contact/Contact.svelte'; */
-  /* import Menubar from './components/Menubar.svelte'; */
+  import Menubar from '../components/components/Menubar.svelte';
   /* import WorkExperiencePage from './resume/WorkExperiencePage.svelte'; */
   /* import SkillsPage from './resume/SkillsPage.svelte'; */
   /* import BackToTop from './components/BackToTop.svelte'; */
