@@ -6,7 +6,6 @@
 </script>
 
 <style>
-  /* @import 'fonts/test.css'; */
   div.row{
     display: flex;
     flex-flow: row wrap;
