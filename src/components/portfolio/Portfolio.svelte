@@ -114,7 +114,7 @@
     text-transform: uppercase;
     color: #f3f5f4;
     font-weight: 100;
-    font-family: "DIN Condensed Web";
+    font-family: "DIN Condensed Web", "Open Sans", sans-serif;
     margin-bottom: 25px;
   }
 
@@ -177,7 +177,8 @@ scale-down: The smaller of either contain or none. */
   h2{
     color: #f3f5f4;
     /* font-family: "Futura PT Web Light"; */
-    font-family: "Futura Std Medium";
+    /* font-family: "Futura Std Medium"; */
+    font-family: "Futura Std Medium", "Open Sans", sans-serif;
     text-transform: uppercase;
     text-align: center;
     font-weight: 300;

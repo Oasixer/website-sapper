@@ -20,7 +20,7 @@
     text-transform: uppercase;
     color: #f3f5f4;
     font-weight: 100;
-    font-family: "DIN Condensed Web";
+    font-family: "DIN Condensed Web", "Open Sans", sans-serif;
     margin-bottom: 25px;
   }
 
@@ -28,7 +28,7 @@
     /* color: #a1a2a3; */
     color: #f3f5f4;
     text-transform: uppercase;
-    font-family: "DIN Condensed Web";
+    font-family: "DIN Condensed Web", "Open Sans", sans-serif;
     text-align: center;
     margin-bottom: 50px;
   }
