@@ -81,6 +81,7 @@
 
   button:active{
     background: none;
+    outline: none;
   }
   
   button:hover{
@@ -89,6 +90,7 @@
 
   button.selected{
     color: #f3f5f4;
+    outline: none;
   }
 </style>
 
