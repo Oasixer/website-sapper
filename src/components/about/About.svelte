@@ -43,7 +43,7 @@
     width: 30%;
   }
 </style>
-
+<title>test</title>
 <div id='about'
   style="background-color: {bg_color}"
   bind:clientHeight={height}>

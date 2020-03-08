@@ -146,6 +146,9 @@
     // Returns boolean depending on whether this point list should be displayed.
     // which depends on if the tags are relevant to the loaded tags, and any other overriding settings like
     // disable_coursework_skills
+
+    console.log('pointList');
+    console.log(pointList);
     
     if (embedded){
       return true;
@@ -160,6 +163,10 @@
     }
 
     if (arrayIntersect($tags, get_indexed_tags(pointList.tags)).length > 0){
+      return true;
+    }
+
+    if (pointList.title == 'Coursework'){
       return true;
     }
 

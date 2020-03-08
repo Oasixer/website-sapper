@@ -8,7 +8,8 @@
   import Header from './components/Header.svelte';
   import Modal from './components/SettingsModal.svelte';
   import Settings from './components/Settings.svelte';
-
+  
+  export let embedded=false;
   let showModal = false;
   let modal; // will be bound to modal instance
 
@@ -123,7 +124,7 @@
     Show Settings
   </button>
   {/if}
-  <Header/>
+  <Header on:click="{() => showModal=!embedded}"/>
   <div class="main-container">
     {#if $single_column}
       <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-main">
