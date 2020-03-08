@@ -283,7 +283,8 @@
 
   h1.skills-section-title{
     margin: 0 15px 0 0;
-    font: 900 roboto, sans-serif; /* 15px font size, set by store instead of hardcoded */
+    font-family: roboto, sans-serif; /* 15px font size, set by store instead of hardcoded */
+    font-weight: 900; /* 15px font size, set by store instead of hardcoded */
   }
 
   h1.skills-section-title.darktheme{

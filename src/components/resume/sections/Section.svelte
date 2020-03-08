@@ -26,6 +26,8 @@
     margin: 0;
     color: purple;
     /* font-size: 24px; */ /* set by store not hardcoded */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-weight: bold;
   }
 
   hr{
