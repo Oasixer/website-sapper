@@ -61,6 +61,12 @@
 </style>
 
 <div id="link-row" class:darktheme={embedded}>
+  {#if !embedded}
+    <a class:darktheme={embedded} href='https://kaelan.xyz'>
+    <p>www.kaelan.xyz</p>
+  </a>
+  <div class="v-line"></div>
+  {/if}
   <a class:darktheme={embedded} href='http://github.com/oasixer'>
     <p class="iconContainerP" class:darktheme={embedded}><Fa icon={faGithub}/></p>
     <p>github.com/oasixer</p>

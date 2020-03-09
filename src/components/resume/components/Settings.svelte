@@ -116,10 +116,6 @@
     {
       name: 'Top name bottom margin',
       store: top_name_bottom_margin
-    },
-    {
-      name: 'Auto populate orders',
-      store: auto_populate_orders
     }
   ].sort((a,b)=>a.name<b.name?-1:1);
 

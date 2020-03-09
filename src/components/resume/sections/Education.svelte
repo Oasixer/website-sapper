@@ -26,7 +26,7 @@
   {/if}
   <div class='line-container' on:click={()=>{show_controls = !show_controls}}>
     {#each lines as line}
-      <p style="font-size: {$education_awards_interests_font_size}px;">{line}</p>
+      <p style="font-size: {$education_awards_interests_font_size}px; line-height: 1;">{line}</p>
     {/each}
   </div>
 </Section>

@@ -47,6 +47,10 @@
     margin: 0 0 15px 0;
   }
 
+  li:not(.darktheme){
+    line-height: 1;
+  }
+
   p.experience-tags{
     font: 300 13px roboto, sans-serif;
     font-style: italic;

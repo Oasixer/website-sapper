@@ -22,7 +22,7 @@
         {title: TagNames.BACKEND, order: 0, force_hide: false, use_index: true},
         {title: TagNames.DYNAMODB, order: 0, force_hide: false, use_index: true}
       ],
-      force_hide: false,
+      force_hide: true,
       order: 0
     },
     {

@@ -323,7 +323,7 @@
         class:darktheme={embedded}
         style=
           "{'margin-bottom: '+((n == items.length -1) ? '0' : '15px')+';'+
-          ((!embedded)?('font-size: '+$skills_content_font_size+'px;'):'')}">
+          ((!embedded)?('font-size: '+$skills_content_font_size+'px;'):'')} line-height: 1;">
         {item.tags.filter(i => !i.force_hide).sort(tag_sort).sort(order_sort).map(i => i.title).join(', ')}
       </p>
       {#if item.show_tag_controls}
