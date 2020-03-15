@@ -15,7 +15,7 @@
       location: 'UW Rocketry - Electrical Team',
       position: 'Programmer',
       date: 'Jan 2019',
-      points: ['Developed scheduling application in Python, deployed to AWS Lambda', 'Created DynamoDB database to store user and group schedules'],
+      points: ['Developed scheduling application in Python, deployed to AWS Lambda', 'Set up REST API Gateway to communicate with AWS Lambda Function''Created DynamoDB database to store user and group schedules'],
       tags: [{title: TagNames.PYTHON, order: 0, force_hide: false, use_index: true},
         {title: TagNames.AWS, order: 0, force_hide: false, use_index: true},
         {title: TagNames.BASH, order: 0, force_hide: false, use_index: true},
