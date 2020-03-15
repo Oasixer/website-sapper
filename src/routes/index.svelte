@@ -1,12 +1,13 @@
 <script>
   import Home from '../components/home/Home.svelte';
-  /* import About from './about/About.svelte'; */
-  /* import Portfolio from './portfolio/Portfolio.svelte'; */
-  /* import Contact from './contact/Contact.svelte'; */
-  /* import Menubar from './components/Menubar.svelte'; */
-  /* import WorkExperiencePage from './resume/WorkExperiencePage.svelte'; */
-  /* import SkillsPage from './resume/SkillsPage.svelte'; */
-  /* import BackToTop from './components/BackToTop.svelte'; */
+  import About from '../components/about/About.svelte';
+  import Portfolio from '../components/portfolio/Portfolio.svelte';
+  import Contact from '../components/contact/Contact.svelte';
+  import Menubar from '../components/components/Menubar.svelte';
+  import WorkExperiencePage from '../components/resume/WorkExperiencePage.svelte';
+  import ResumePage from '../components/resume/ResumePage.svelte';
+  import SkillsPage from '../components/resume/SkillsPage.svelte';
+  import BackToTop from '../components/components/BackToTop.svelte';
 
   import { onMount } from 'svelte';
 
@@ -17,13 +18,13 @@
 
   let sections = [
     {component: Home, name:'Home', excludeFromMenubar: false},
-    /* {component: About, name:'About', excludeFromMenubar: false}, */
-    /* {component: WorkExperiencePage, name:'Work Experience', excludeFromMenubar: false}, */
-    /* {component: SkillsPage, name:'Skills', excludeFromMenubar: false}, */
-    /* {component: Portfolio, name:'Portfolio', excludeFromMenubar: false}, */
-    /* {component: ResumePage, name:'Resume', excludeFromMenubar: false}, */
-    /* {component: Contact, name:'Contact', excludeFromMenubar: false}, */
-    /* {component: BackToTop, excludeFromMenubar: true} */
+    {component: About, name:'About', excludeFromMenubar: false},
+    {component: WorkExperiencePage, name:'Work Experience', excludeFromMenubar: false},
+    {component: SkillsPage, name:'Skills', excludeFromMenubar: false},
+    {component: Portfolio, name:'Portfolio', excludeFromMenubar: false},
+    {component: ResumePage, name:'Resume', excludeFromMenubar: false},
+    {component: Contact, name:'Contact', excludeFromMenubar: false},
+    {component: BackToTop, excludeFromMenubar: true}
   ];
 
   function move(event){
@@ -72,17 +73,20 @@
     scroll-behavior: smooth;
   }
 </style>
-
+<!--  <svelte:head>
 <link href="//db.onlinewebfonts.com/c/69dbc1186412d7831b88d8a78a360360?family=DIN+Condensed+Web" rel="stylesheet" type="text/css"/>
 <link href="//db.onlinewebfonts.com/c/84d8d4c49f66a6a5abe1e0608ba764a2?family=Source+Sans+Pro" rel="stylesheet" type="text/css"/>
 <link href="//db.onlinewebfonts.com/c/36c361ac34f216ed98000d61fa8ac996?family=Futura+PT+Web+Light" rel="stylesheet" type="text/css"/>
 <link href="//db.onlinewebfonts.com/c/6e390d15863032277a741e08a6b18ce2?family=Futura+Std+Medium" rel="stylesheet" type="text/css"/>
+</svelte:head>  -->
+<title>Kaelan Moffett</title>
+
 <svelte:window bind:scrollY={y}/>
 
-<!--  <Menubar floaty={false} {sections} {curSection} on:move={move}/>  -->
+<Menubar floaty={false} {sections} {curSection} on:move={move}/>
 
 {#if curSection>0}
-  <!--  <Menubar floaty={true} {sections} {curSection} on:move={move}/>  -->
+<Menubar floaty={true} {sections} {curSection} on:move={move}/>
 {/if}
 
 {#each sections as section, n}
