@@ -4,6 +4,7 @@
   export let embedded=false;
 
   import ListControls from './ListControls.svelte';
+  import ExpItemPointList from './ExpItemPointList.svelte';
 
   import { 
     show_project_locations,
@@ -18,6 +19,7 @@
 
   let enable_tag_controls = false;
   let enable_section_controls = false;
+  let enable_exp_item_point_list_controls = false;
 
   let itemContainer = [item]; // for 2way binding in single subsection controls
 
@@ -157,13 +159,11 @@
     {/if}
   </div>
 
-  <ul>
-  {#each item.points as p}
-    <li class:darktheme={embedded} style="{(!embedded)?('font-size: '+$experience_content_font_size+'px'):''}">
-      {p}
-    </li>
-  {/each}
-  </ul>
+  {#if enable_exp_item_point_list_controls}
+    <ListControls bind:items={item.points} title='ExpItem Point List Controls'/>
+  {/if}
+
+  <ExpItemPointList bind:embedded bind:items={item.points} bind:show_controls={enable_exp_item_point_list_controls} />
   {#if $show_tags_under_experience}
     <p class="experience-tags" class:darktheme={embedded} on:click={toggle_tag_controls}>{tags_text}</p>
     {#if enable_tag_controls}

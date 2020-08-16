@@ -1,6 +1,11 @@
 import { writable } from 'svelte/store';
 
 export let TagNames = {
+  PCB: 'PCB Design',
+  PLC: 'PLC Programming',
+  SOLDERING: 'Soldering',
+  WIRING: 'Wiring',
+  CIRCUITS: 'Circuit Design/Analysis',
   FRONTEND: 'Frontend web development',
   BACKEND: 'Backend',
   CONTROL_SYSTEMS: 'Control systems',
@@ -44,7 +49,12 @@ export let TagNames = {
   SQLALCHEMY: "SQLAlchemy",
   D3: "D3.js",
   DYNAMODB: 'Amazon DynamoDB',
-  JQUERY: 'JQuery'
+  JQUERY: 'JQuery',
+  GCLOUD: 'Google Cloud',
+  APPENGINE: 'AppEngine',
+  CLOUD_RUN: 'CloudRun',
+  COMPUTE_ENGINE: 'Compute Engine',
+  NODEJS: 'NodeJS',
 }
 
 // For tags that are more categories than specific

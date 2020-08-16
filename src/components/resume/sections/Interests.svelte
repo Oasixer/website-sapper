@@ -1,6 +1,6 @@
 <script>
   import Section from './Section.svelte';
-  import PointList from '../components/PointList.svelte';
+  import AwardsInterestsPointList from '../components/AwardsInterestsPointList.svelte';
   import ListControls from '../components/ListControls.svelte';
   import SectionControls from '../components/SectionControls.svelte';
 
@@ -27,5 +27,5 @@
     <SectionControls bind:force_hide/>
     <ListControls bind:items/>
   {/if}
-  <PointList bind:items bind:show_controls/>
+  <AwardsInterestsPointList bind:items bind:show_controls/>
 </Section>
