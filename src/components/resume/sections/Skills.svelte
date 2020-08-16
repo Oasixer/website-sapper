@@ -113,6 +113,19 @@
       order: 0
     },
     {
+      title: 'Electrical',
+      tags: [{title: TagNames.PCB, order: 0, force_hide: false, use_index: true},
+        {title: TagNames.PLC, order: 0, force_hide: false, use_index: true},
+        {title: TagNames.SOLDERING, order: 0, force_hide: false, use_index: true},
+        {title: TagNames.WIRING, order: 0, force_hide: false, use_index: true},
+        {title: TagNames.CIRCUITS, order: 0, force_hide: false, use_index: true}
+      ],
+      show_controls: false,
+      show_tag_controls: false,
+      force_hide: true,
+      order: 0
+    },
+    {
       title: 'Coursework',
       tags: [{title: 'Data Structures and Algorithms', order: 0, force_hide: false, use_index: false},
         { title: 'Microprocessors', order: 0, force_hide: false, use_index: false}],
