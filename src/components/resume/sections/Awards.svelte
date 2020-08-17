@@ -1,4 +1,7 @@
 <script>
+  export let contentSettings;
+  $: contentSettings = items;
+
   import Section from './Section.svelte';
   import AwardsInterestsPointList from '../components/AwardsInterestsPointList.svelte';
   import ListControls from '../components/ListControls.svelte';
@@ -14,6 +17,7 @@
 
   let show_controls = false;
   let force_hide = false;
+
   
 </script>
 

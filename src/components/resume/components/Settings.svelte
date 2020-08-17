@@ -27,7 +27,12 @@
     TagNames
   } from '../utils/settings.js';
 
+  import { createEventDispatcher } from 'svelte';
   import { sleep, getStoreValue } from '../utils/misc.js';
+
+  /* const dispatch = createEventDispatcher(); */
+  /* const dispatchGetContentSettings = () => {dispatch('getContentSettings');} */
+  export let getContentSettings;
 
   export let modal;
 
@@ -172,7 +177,23 @@
   function tagIsEnabled(tag){
     return {$tags}.includes(tag);
   }
+  
+  const moveFiles = () => {
+    let fileBuffer = [];
+    Array.prototype.push.apply(fileBuffer, fileInput.files);
+    let mapped = fileBuffer.map((i)=>{return{name: i.name, file:i}});
+    let names = fileBuffer.map((i)=> i.name); // for removing duplicates
+    fileInput.value = ''; // reset the fileInput
+    // TODO: some popup asking the user if they want to replace the duplicate file or not
+    files = files.filter((i) => !names.includes(i.name)); // remove duplicates
+    files = [...files, ...mapped]; // concatenate
+  }
 
+  let fileInput;
+
+  const attachFile = () => {
+    fileInput.click();
+  }
 
   async function export_print(){
     disable_settings_button.set(true);
@@ -180,6 +201,37 @@
     await sleep(500);
     window.print();
     disable_settings_button.set(false);
+  }
+  
+  function downloadFile(file){
+    let url = '/getFile/'+file.id;
+    let a = document.createElement("a");
+    a.href = url; // apparently this is actually a decent way to download files...
+    a.setAttribute("download", file.name);
+    // Set name when downloaded to everything following the _, ie. remove the file ID prefix from the filename
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  
+  async function import_settings(){
+    attachFile();
+  }
+  
+  async function export_settings(){
+    console.log(fileInput.files)
+    let json = new Object();
+    json.settings = new Object();
+    const allSettings = [...bools, ...ints];
+    allSettings.forEach(function(i) {
+      json.settings[i.name] = getStoreValue(i)
+    });
+    
+    /* let test = await dispatchGetContentSettings(); */
+    let test = await getContentSettings();
+    console.log(test);
+    
+    /* f = File(); */
   }
   
 </script>
@@ -302,3 +354,13 @@ input[type="number"]{
   </div>
 </div>
 <button on:click={export_print}>Export to PDF by printing (select PDF)</button>
+<button on:click={export_settings}>Export settings to file</button>
+<button on:click={import_settings}>Import settings from a file</button>
+
+<input
+  type="file"
+  size="chars"
+  style="display:block; display:none; visibility:hidden; width:0; height:0;"
+  multiple
+  on:change={moveFiles}
+  bind:this={fileInput}>

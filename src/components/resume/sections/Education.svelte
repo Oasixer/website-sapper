@@ -1,4 +1,5 @@
 <script>
+  export let contentSettings;
   import Section from './Section.svelte';
   import { education_awards_interests_font_size } from '../utils/settings.js';
   import SectionControls from '../components/SectionControls.svelte';

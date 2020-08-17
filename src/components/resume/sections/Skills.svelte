@@ -1,4 +1,7 @@
 <script>
+  export let contentSettings;
+  $: contentSettings = items;
+
   import Section from './Section.svelte';
   import ListControls from '../components/ListControls.svelte';
   import SectionControls from '../components/SectionControls.svelte';
@@ -160,8 +163,8 @@
     // which depends on if the tags are relevant to the loaded tags, and any other overriding settings like
     // disable_coursework_skills
 
-    console.log('pointList');
-    console.log(pointList);
+    /* console.log('pointList'); */
+    /* console.log(pointList); */
     
     if (embedded){
       return true;
