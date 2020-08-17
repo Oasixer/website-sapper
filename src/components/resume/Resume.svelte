@@ -21,37 +21,43 @@
     name: 'WorkExperience',
     component: WorkExperience,
     order: {$orders}.WORKEXPERIENCE,
-    group: 'main'
+    group: 'main',
+    contentSettings: {}
   },
   {
     name: 'SideProjects',
     component: SideProjects,
     order: {$orders}.SIDEPROJECTS,
-    group: 'main'
+    group: 'main',
+    contentSettings: {}
   },
   {
     name: 'Skills',
     component: Skills,
     order: {$orders}.SKILLS,
-    group: 'other'
+    group: 'other',
+    contentSettings: {}
   },
   {
     name: 'Education',
     component: Education,
     order: {$orders}.EDUCATION,
-    group: 'other'
+    group: 'other',
+    contentSettings: {}
   },
   {
     name: 'Awards',
     component: Awards,
     order: {$orders}.AWARDS,
-    group: 'other'
+    group: 'other',
+    contentSettings: {}
   },
   {
     name: 'Interests',
     component: Interests,
     order: {$orders}.INTERESTS,
-    group: 'other'
+    group: 'other',
+    contentSettings: {}
   }
   ];
 
@@ -74,6 +80,14 @@
     }).sort((a, b) => {
     return a.order - b.order;
     });
+
+  const getContentSettings = () => {
+    let settings = new Object();
+    allSections.forEach(i => {
+      settings[i.name] = i.contentSettings;
+    });
+    return settings;
+  }
 
 </script>
 
@@ -129,30 +143,30 @@
     {#if $single_column}
       <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-main">
         {#each singleCol as i}
-            <svelte:component this={i.component}/>
+            <svelte:component this={i.component} bind:contentSettings={i.contentSettings}/>
         {/each}
       </div>
     {:else}
       {#if $swap_columns}
         <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-other">
           {#each otherCol as i}
-            <svelte:component this={i.component}/>
+            <svelte:component this={i.component} bind:contentSettings={i.contentSettings}/>
           {/each}
         </div>
         <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-main">
           {#each mainCol as i}
-            <svelte:component this={i.component}/>
+            <svelte:component this={i.component} bind:contentSettings={i.contentSettings}/>
           {/each}
         </div>
       {:else}
         <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-main">
           {#each mainCol as i}
-            <svelte:component this={i.component}/>
+            <svelte:component this={i.component} bind:contentSettings={i.contentSettings}/>
           {/each}
         </div>
         <div style={$top_align_sections?"justify-content: flex-start":""} class="column col-other">
           {#each otherCol as i}
-            <svelte:component this={i.component}/>
+            <svelte:component this={i.component} bind:contentSettings={i.contentSettings}/>
           {/each}
         </div>
       {/if}
@@ -161,7 +175,7 @@
 
 {#if showModal}
   <Modal on:close="{() => showModal = false}" bind:this={modal}>
-    <Settings {modal}/>
+    <Settings {modal} getContentSettings={getContentSettings}/>
 	</Modal>
 {/if}
 </main>

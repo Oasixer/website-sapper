@@ -1,4 +1,7 @@
 <script>
+  export let contentSettings;
+  $: contentSettings = items;
+
   import Section from './Section.svelte';
   import ExperienceList from '../components/ExperienceList.svelte';
   import ListControls from '../components/ListControls.svelte';
