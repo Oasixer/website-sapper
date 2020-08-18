@@ -96,10 +96,9 @@
       order: 0
     }
   ];
-
 </script>
 
-    <Section {header} {force_hide} bind:show_controls>
+<Section {header} {force_hide} bind:show_controls>
   {#if show_controls}
     <SectionControls bind:force_hide/>
     <ListControls bind:items/>
