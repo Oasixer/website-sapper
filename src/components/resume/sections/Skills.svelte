@@ -322,7 +322,7 @@
 <Section {header} {embedded} bind:show_controls {force_hide}>
   {#if show_controls}
     <SectionControls bind:force_hide/>
-    <ListControls bind:items/>
+    <ListControls bind:items on:close={show_controls=false}/>
   {/if}
   {#each items.concat().sort((a, b) => a.order - b.order) as item, n}
     {#if should_display_pointlist(item, $tags)}
@@ -332,7 +332,7 @@
           {item.title}
       </h1>
       {#if item.show_controls}
-        <ListControls single={true} items={[item]}/>
+        <ListControls single={true} items={[item]} on:close={()=>{item.show_controls = false}}/>
       {/if}
         <p 
         on:click={()=>{toggle_tags_controls(item)}}
@@ -343,7 +343,7 @@
         {item.tags.filter(i => !i.force_hide).sort(tag_sort).sort(order_sort).map(i => i.title).join(', ')}
       </p>
       {#if item.show_tag_controls}
-        <ListControls title='Tag Controls' bind:items={item.tags}/>
+        <ListControls title='Tag Controls' bind:items={item.tags} on:close={()=>{item.show_tag_controls=false}}/>
       {/if}
     {/if}
   {/each}

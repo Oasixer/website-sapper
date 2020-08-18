@@ -23,6 +23,8 @@
 
   let itemContainer = [item]; // for 2way binding in single subsection controls
 
+  /* $: console.log(`: ${item.points}`); */
+
   function toggle_tag_controls(){
     if (embedded){
       return;
@@ -160,7 +162,7 @@
   </div>
 
   {#if enable_exp_item_point_list_controls}
-    <ListControls bind:items={item.points} title='ExpItem Point List Controls'/>
+    <ListControls bind:items={item.points} on:close={()=>{enable_exp_item_point_list_controls = !enable_exp_item_point_list_controls}} title='ExpItem Point List Controls'/>
   {/if}
 
   <ExpItemPointList bind:embedded bind:items={item.points} bind:show_controls={enable_exp_item_point_list_controls} />

@@ -3,7 +3,12 @@
   export let single=false;
   export let title=undefined;
   import { auto_populate_orders } from '../utils/settings.js';
-  import {onMount} from 'svelte'; 
+  import TrashIconButton from './TrashIconButton.svelte';
+  import { onMount } from 'svelte'; 
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+  const dispatchClose = () => {dispatch('close')};
 
   function refresh(){
     items = [...items];
@@ -145,7 +150,10 @@
 
 <div class="list-controls-outer">
   {#if single != true || title != undefined}
-    <h4>{title ? title : 'List Controls'}</h4>
+    <div class="row">
+      <h4>{title ? title : 'List Controls'}</h4>
+      <TrashIconButton on:click={dispatchClose}/>
+    </div>
   {/if}
   {#each items as item}
     <div class="individual">
@@ -155,6 +163,9 @@
       <div class="row">
         <input type="number" bind:value={item.order}>
         <label>Order</label>
+        {#if single}
+          <TrashIconButton on:click={dispatchClose}/>
+        {/if}
       </div>
       <label class="container">Force Hide
         <input type="checkbox" bind:checked={item.force_hide}>

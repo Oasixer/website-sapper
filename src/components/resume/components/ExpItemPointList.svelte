@@ -8,6 +8,7 @@
   function toggle_controls(){
      show_controls = !show_controls;
   }
+
 </script>
 
 <style>

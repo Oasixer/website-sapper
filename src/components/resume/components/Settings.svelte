@@ -38,6 +38,8 @@
 
   /* $: console.log({$tags}); */
 
+  let fileInput;
+
   $: bools = [
     {
       name: 'Show project locations',
@@ -189,10 +191,12 @@
     files = [...files, ...mapped]; // concatenate
   }
 
-  let fileInput;
-
   const attachFile = () => {
     fileInput.click();
+  }
+  
+  async function import_settings(){
+    attachFile();
   }
 
   async function export_print(){
@@ -203,20 +207,16 @@
     disable_settings_button.set(false);
   }
   
-  function downloadFile(file){
-    let url = '/getFile/'+file.id;
-    let a = document.createElement("a");
-    a.href = url; // apparently this is actually a decent way to download files...
-    a.setAttribute("download", file.name);
-    // Set name when downloaded to everything following the _, ie. remove the file ID prefix from the filename
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+  function downloadFile(filename, text) {
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   }
   
-  async function import_settings(){
-    attachFile();
-  }
   
   async function export_settings(){
     console.log(fileInput.files)
@@ -228,10 +228,15 @@
     });
     
     /* let test = await dispatchGetContentSettings(); */
-    let test = await getContentSettings();
-    console.log(test);
-    
-    /* f = File(); */
+    let contentSettings = getContentSettings();
+    console.log(contentSettings);
+    json.contentSettings = contentSettings;
+
+    /* let file = new File([JSON.stringify(json)], "settings.txt", { */
+      /* type: "text/plain", */
+    /* }); */
+
+    downloadFile('settings.json', JSON.stringify(json, null, 2));
   }
   
 </script>

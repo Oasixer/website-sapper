@@ -11,6 +11,11 @@
 </script>
 
 <style>
+  div.row{
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
   div.section-main{
     margin: 0;
     margin-bottom: 10px;
