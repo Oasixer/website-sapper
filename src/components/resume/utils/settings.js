@@ -88,7 +88,6 @@ export const show_project_dates = writable(false);
 export const swap_columns = writable(false);
 export const single_column = writable(false);
 
-export const auto_populate_orders = writable(true);
 export const force_use_all_employment = writable(true);
 export const show_tags_under_experience = writable(true);
 export const disable_categorical_tags = writable(true);

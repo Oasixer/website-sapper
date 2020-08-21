@@ -1,14 +1,32 @@
 <script>
-  export let contentSettings;
-  $: contentSettings = items;
+  export const contentSettings = () => {
+    console.log(items[0].force_hide);
+    return items;
+  };
+  
+  export const setContentSettings = (itemSettings) => {
+    items.forEach(function (item) {
+      let s = itemSettings.find(i => i.title == item.title);
+      if (s){
+        for (const property in s) {
+          console.log(`${property}: ${s[property]}`);
+          item[property] = s[property];
+        };
+      }
+    });
+    console.log(`item0.force_hide: ${items[0].force_hide}`);
+    items = [...items];
+    console.log(`item0.force_hide: ${items[0].force_hide}`);
+  };
+
+  $: console.log(`item[0].force_hide: ${items[0].force_hide}`);
 
   import Section from './Section.svelte';
   import ListControls from '../components/ListControls.svelte';
   import SectionControls from '../components/SectionControls.svelte';
   import { TagNames, tags, alternate_skills_display_mode,
     skills_headings_font_size, skills_content_font_size,
-    force_display_skills_ignore_tags,
-    auto_populate_orders
+    force_display_skills_ignore_tags
   } from '../utils/settings.js';
   import { arrayIntersect } from '../utils/misc.js';
   import {onMount} from 'svelte';
@@ -16,39 +34,25 @@
   
   export let embedded=false;
   let header = 'Skills';
-  let show_controls = false;
+  let show_section_controls = false;
+  let show_list_controls = false;
   let force_hide = false;
-
-  $: if ($auto_populate_orders || embedded){
-    populate_orders();
-  }
-
-  function populate_orders(){
-    if (items.populated){
-      console.log('already popped');
-      return;
-    }
-    for (let i=0; i<items.length; i++){
-      items[i].order = i*2+1;
-    }
-    items.populated=true;
-  }
 
   let items = [
     {
       title: 'Frontend Webdev / UI',
-      tags: [{title: TagNames.SVELTE, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.REACT,  order: 0, force_hide: false, use_index: true},
-        {title: TagNames.HTML, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.SCSS, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.CSS, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.JQUERY,  order: 0, force_hide: false, use_index: true},
-        {title: TagNames.QT, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.PYQT, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.SELENIUM, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.LATEX, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.FRONTEND, order: 0, force_hide: true, use_index: true},
-        {title: TagNames.UI, order: 0, force_hide: true, use_index: true}
+      tags: [{title: TagNames.SVELTE, order: 2, force_hide: false, use_index: true},
+        {title: TagNames.REACT,  order: 4, force_hide: false, use_index: true},
+        {title: TagNames.HTML, order: 6, force_hide: false, use_index: true},
+        {title: TagNames.SCSS, order: 8, force_hide: false, use_index: true},
+        {title: TagNames.CSS, order: 10, force_hide: false, use_index: true},
+        {title: TagNames.JQUERY,  order: 12, force_hide: false, use_index: true},
+        {title: TagNames.QT, order: 14, force_hide: false, use_index: true},
+        {title: TagNames.PYQT, order: 16, force_hide: false, use_index: true},
+        {title: TagNames.SELENIUM, order: 18, force_hide: false, use_index: true},
+        {title: TagNames.LATEX, order: 20, force_hide: false, use_index: true},
+        {title: TagNames.FRONTEND, order: 22, force_hide: true, use_index: true},
+        {title: TagNames.UI, order: 24, force_hide: true, use_index: true}
       ],
       show_controls: false,
       show_tag_controls: false,
@@ -57,85 +61,85 @@
     },
     {
       title: 'Backend / Database',
-      tags: [{title: TagNames.FLASK, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.AWS, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.POSTGRESQL, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.SQLALCHEMY, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.SQL, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.ORACLEDB, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.DOCKER, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.DYNAMODB, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.BACKEND, order: 0, force_hide: true, use_index: true}
+      tags: [{title: TagNames.FLASK, order: 2, force_hide: false, use_index: true},
+        {title: TagNames.AWS, order: 4, force_hide: false, use_index: true},
+        {title: TagNames.POSTGRESQL, order: 6, force_hide: false, use_index: true},
+        {title: TagNames.SQLALCHEMY, order: 8, force_hide: false, use_index: true},
+        {title: TagNames.SQL, order: 10, force_hide: false, use_index: true},
+        {title: TagNames.ORACLEDB, order: 12, force_hide: false, use_index: true},
+        {title: TagNames.DOCKER, order: 14, force_hide: false, use_index: true},
+        {title: TagNames.DYNAMODB, order: 16, force_hide: false, use_index: true},
+        {title: TagNames.BACKEND, order: 18, force_hide: true, use_index: true}
       ],
       show_controls: false,
       show_tag_controls: false,
       force_hide: false,
-      order: 0
+      order: 2
     },
     {
       title: 'Languages',
-      tags: [{title: TagNames.PYTHON, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.CPP, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.C, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.JS, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.ARDUINO, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.BASH, order: 0, force_hide: false, use_index: true}
+      tags: [{title: TagNames.PYTHON, order: 2, force_hide: false, use_index: true},
+        {title: TagNames.CPP, order: 4, force_hide: false, use_index: true},
+        {title: TagNames.C, order: 6, force_hide: false, use_index: true},
+        {title: TagNames.JS, order: 8, force_hide: false, use_index: true},
+        {title: TagNames.ARDUINO, order: 10, force_hide: false, use_index: true},
+        {title: TagNames.BASH, order: 12, force_hide: false, use_index: true}
       ],
       show_controls: false,
       show_tag_controls: false,
       force_hide: false,
-      order: 0
+      order: 4
     },
     {
       title: 'Control Systems',
-      tags: [{title: TagNames.ROS, order: 0, force_hide: false, use_index: true},
-        {title: "Rasperry Pi (Embedded)", order: 0, force_hide: false, use_index: true},
-        {title: "Autonomous Pathfinding", order: 0, force_hide: false, use_index: true},
-        {title: "Image Processing/Object Detection in OpenCV", order: 0, force_hide: false, use_index: true}
+      tags: [{title: TagNames.ROS, order: 2, force_hide: false, use_index: true},
+        {title: "Rasperry Pi (Embedded)", order: 4, force_hide: false, use_index: true},
+        {title: "Autonomous Pathfinding", order: 6, force_hide: false, use_index: true},
+        {title: "Image Processing/Object Detection in OpenCV", order: 8, force_hide: false, use_index: true}
       ],
       show_controls: false,
       show_tag_controls: false,
       force_hide: false,
-      order: 0
+      order: 6
     },
     {
       title: 'Data analysis / Visualization',
-      tags: [{title: TagNames.SPACY, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.NLTK, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.D3, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.PLOTLY, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.MATPLOTLIB, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.PANDAS, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.DATA_ANALYSIS, order: 0, force_hide: true, use_index: true},
-        {title: TagNames.DATA_VISUALIZATION, order: 0, force_hide: true, use_index: true},
-        {title: TagNames.NLP, order: 0, force_hide: true, use_index: true}
+      tags: [{title: TagNames.SPACY, order: 2, force_hide: false, use_index: true},
+        {title: TagNames.NLTK, order: 4, force_hide: false, use_index: true},
+        {title: TagNames.D3, order: 6, force_hide: false, use_index: true},
+        {title: TagNames.PLOTLY, order: 8, force_hide: false, use_index: true},
+        {title: TagNames.MATPLOTLIB, order: 10, force_hide: false, use_index: true},
+        {title: TagNames.PANDAS, order: 12, force_hide: false, use_index: true},
+        {title: TagNames.DATA_ANALYSIS, order: 14, force_hide: true, use_index: true},
+        {title: TagNames.DATA_VISUALIZATION, order: 16, force_hide: true, use_index: true},
+        {title: TagNames.NLP, order: 18, force_hide: true, use_index: true}
       ],
       show_controls: false,
       show_tag_controls: false,
       force_hide: false,
-      order: 0
+      order: 8
     },
     {
       title: 'Electrical',
-      tags: [{title: TagNames.PCB, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.PLC, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.SOLDERING, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.WIRING, order: 0, force_hide: false, use_index: true},
-        {title: TagNames.CIRCUITS, order: 0, force_hide: false, use_index: true}
+      tags: [{title: TagNames.PCB, order: 2, force_hide: false, use_index: true},
+        {title: TagNames.PLC, order: 4, force_hide: false, use_index: true},
+        {title: TagNames.SOLDERING, order: 6, force_hide: false, use_index: true},
+        {title: TagNames.WIRING, order: 8, force_hide: false, use_index: true},
+        {title: TagNames.CIRCUITS, order: 10, force_hide: false, use_index: true}
       ],
       show_controls: false,
       show_tag_controls: false,
       force_hide: true,
-      order: 0
+      order: 10
     },
     {
       title: 'Coursework',
-      tags: [{title: 'Data Structures and Algorithms', order: 0, force_hide: false, use_index: false},
-        { title: 'Microprocessors', order: 0, force_hide: false, use_index: false}],
+      tags: [{title: 'Data Structures and Algorithms', order: 2, force_hide: false, use_index: false},
+        { title: 'Microprocessors', order: 4, force_hide: false, use_index: false}],
       show_controls: false,
       show_tag_controls: false,
       force_hide: true,
-      order: 0
+      order: 12
     }
   ];
 
@@ -319,17 +323,19 @@
   }
 </style>
 
-<Section {header} {embedded} bind:show_controls {force_hide}>
-  {#if show_controls}
-    <SectionControls bind:force_hide/>
-    <ListControls bind:items on:close={show_controls=false}/>
+<Section {header} {force_hide} bind:show_section_controls bind:show_list_controls>
+  {#if show_section_controls}
+    <SectionControls bind:force_hide on:close={()=>{show_section_controls=false}}/>
+  {/if}
+  {#if show_list_controls}
+    <ListControls bind:items on:close={()=>{show_list_controls=false;}}/>
   {/if}
   {#each items.concat().sort((a, b) => a.order - b.order) as item, n}
     {#if should_display_pointlist(item, $tags)}
       <h1 class="skills-section-title" class:darktheme={embedded}
       style="{(!embedded)?('font-size: '+$skills_headings_font_size+'px;'):''}"
          on:click={()=>{item.show_controls = !item.show_controls}}>
-          {item.title}
+          {item.title_alt?item.title_alt:item.title}
       </h1>
       {#if item.show_controls}
         <ListControls single={true} items={[item]} on:close={()=>{item.show_controls = false}}/>
@@ -340,7 +346,7 @@
         style=
           "{'margin-bottom: '+((n == items.length -1) ? '0' : '15px')+';'+
           ((!embedded)?('font-size: '+$skills_content_font_size+'px;'):'')} line-height: 1;">
-        {item.tags.filter(i => !i.force_hide).sort(tag_sort).sort(order_sort).map(i => i.title).join(', ')}
+        {item.tags.filter(i => !i.force_hide).sort(tag_sort).sort(order_sort).map(i => i.title_alt?i.title_alt:i.title).join(', ')}
       </p>
       {#if item.show_tag_controls}
         <ListControls title='Tag Controls' bind:items={item.tags} on:close={()=>{item.show_tag_controls=false}}/>

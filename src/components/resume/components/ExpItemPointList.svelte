@@ -35,7 +35,7 @@
 <ul on:click={toggle_controls}>
   {#each items.filter(i=>!i.force_hide).concat().sort((a,b)=>a.order - b.order) as i}
     <li style="{(!embedded)?('font-size: '+$experience_content_font_size+'px'):''}">
-    {i.title}
+    {i.title_alt || i.title}
     </li>
   {/each}
 </ul>

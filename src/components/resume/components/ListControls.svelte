@@ -2,50 +2,22 @@
   export let items;
   export let single=false;
   export let title=undefined;
-  import { auto_populate_orders } from '../utils/settings.js';
   import TrashIconButton from './TrashIconButton.svelte';
   import { onMount } from 'svelte'; 
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
-  const dispatchClose = () => {dispatch('close')};
+  const dispatchClose = () => {
+    dispatch('close');
+    console.log('close');
+    refresh();
+  };
 
   function refresh(){
     items = [...items];
   }
 
-  function populate(){
-    if (single == true){
-      console.log('single');
-      for(let i=0; i<items.length; i++){
-        console.log(items[i].order);
-      }
-
-      return;
-    }
-    console.log('not single');
-    if (items.populated == true){
-      console.log('already popped');
-      return;
-    }
-    console.log('not already popped')
-    for(let i=0; i<items.length; i++){
-      items[i].order=2*i+1;
-    }
-    items.populated=true;
-  }
-
-  $: if($auto_populate_orders){
-    populate();
-  }
-
   onMount(async => {
-    if(single == true){
-      return;
-    }
-    if ($auto_populate_orders){
-      populate();
-    }
   });
 
 
@@ -137,6 +109,12 @@
     height: 25px;
     margin-right: 8px;
   }
+  input[type="text"]{
+    width: 100%;
+    font-size: 12px;
+    height: 25px;
+    margin-right: 8px;
+  }
 
   div.list-controls-outer{
     background-color: #cccccc;
@@ -158,14 +136,25 @@
   {#each items as item}
     <div class="individual">
       {#if single != true}
-        <h4>{item.title}</h4>
+        <h4><b>title:</b> {item.title}</h4>
+      {/if}
+      <div class="row">
+        <button on:click={()=>{item.title_alt=(item.title_alt?undefined:item.title)}}>
+          {item.title_alt===undefined ? "Create alt title" : "Remove alt title"}
+        </button>
+        {#if single && (title == undefined)}
+          <TrashIconButton on:click={dispatchClose}/>
+        {/if}
+      </div>
+      {#if item.title_alt !== undefined}
+        <div class="row">
+          <span><b>title_alt: </b></span>
+          <input type="text" bind:value={item.title_alt}>
+        </div>
       {/if}
       <div class="row">
         <input type="number" bind:value={item.order}>
         <label>Order</label>
-        {#if single}
-          <TrashIconButton on:click={dispatchClose}/>
-        {/if}
       </div>
       <label class="container">Force Hide
         <input type="checkbox" bind:checked={item.force_hide}>

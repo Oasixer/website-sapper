@@ -1,12 +1,13 @@
 <script>
   export let header;
-  export let show_controls = false;
+  export let show_section_controls = false;
+  export let show_list_controls = false;
   export let force_hide;
   export let embedded=false;
   import { section_headings_font_size } from '../utils/settings.js';
 
-  function toggle_controls(){
-    show_controls = !show_controls;
+  function enable_controls(){
+    show_section_controls=true;
   }
 </script>
 
@@ -47,7 +48,7 @@
 <div class='section-main'>
   {#if !embedded}
   <h1 style="font-size: {$section_headings_font_size}px;"
-      on:click={toggle_controls}>{header}</h1>
+      on:click={enable_controls}>{header}</h1>
   <hr>
   {/if}
   <div class='section-content'>

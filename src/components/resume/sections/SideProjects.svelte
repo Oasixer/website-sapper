@@ -1,23 +1,42 @@
 <script>
-  export let contentSettings;
-  $: contentSettings = items.map(i => {
-    let newObj = new Object();
-    newObj.title = i.title;
-    newObj.points = i.points;
-    newObj.order = i.order;
-    newObj.force_hide = i.force_hide;
-    newObj.tags = i.tags;
-    return newObj;
-  });
+  export const contentSettings = () => {
+    return items;
+  };
+
+  export const setContentSettings = (itemSettings) => {
+    items.forEach(function (item) {
+      let s = itemSettings.find(i => {
+        if (i.title === item.title){
+          return true;
+        } 
+      });
+      if (s){ // if settings were found for this item
+        item.title_alt = s.title_alt;
+        item.order = s.order;
+        item.force_hide = s.force_hide;
+        item.tags = s.tags;
+        item.points.forEach(function (j) {
+          let p = s.points.find(x => x.title === j.title);
+          if (p){
+            j.title_alt = p.title_alt;
+            j.order = p.order;
+            j.force_hide = p.force_hide;
+          }
+        });
+      }
+    });
+    items = [...items];
+  };
 
   import Section from './Section.svelte';
   import ExperienceList from '../components/ExperienceList.svelte';
   import ListControls from '../components/ListControls.svelte';
   import SectionControls from '../components/SectionControls.svelte';
-  import { TagNames, auto_populate_orders } from '../utils/settings.js';
+  import { TagNames } from '../utils/settings.js';
 
   let header = 'Projects';
-  let show_controls = false;
+  let show_section_controls = false;
+  let show_list_controls = false;
   let force_hide = false;
   let items = [{
     title: 'Slack Chatbot (AWS)',
@@ -26,15 +45,15 @@
     date: 'Jan 2019',
     points: [{
       title: 'Developed scheduling application in Python, deployed to AWS Lambda',
-      order: 0,
+      order: 2,
       force_hide: false
     }, {
       title: 'Set up REST API Gateway to communicate with AWS Lambda Function',
-      order: 0,
+      order: 4,
       force_hide: false
     }, {
       title: 'Created Amazon DynamoDB database to store user and group schedules',
-      order: 0,
+      order: 6,
       force_hide: false
     }],
     tags: [{
@@ -45,25 +64,25 @@
       },
       {
         title: TagNames.AWS,
-        order: 0,
+        order: 2,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.BASH,
-        order: 0,
+        order: 4,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.BACKEND,
-        order: 0,
+        order: 6,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.DYNAMODB,
-        order: 0,
+        order: 8,
         force_hide: false,
         use_index: true
       }
@@ -82,7 +101,7 @@
       force_hide: false
     }, {
       title: 'Improved analysis capabilities by creating data visualizations with D3.js graphs encapsulated as Python Plotly Dash components',
-      order: 0,
+      order: 2,
       force_hide: false
     }],
     tags: [{
@@ -93,31 +112,31 @@
       },
       {
         title: TagNames.ARDUINO,
-        order: 0,
+        order: 2,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.DATA_VISUALIZATION,
-        order: 0,
+        order: 4,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.PLOTLY,
-        order: 0,
+        order: 6,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.D3,
-        order: 0,
+        order: 8,
         force_hide: false,
         use_index: true
       }
     ],
     force_hide: false,
-    order: 0
+    order: 2
   },
   {
     title: 'PyBudgeter',
@@ -130,7 +149,7 @@
       force_hide: false
     }, {
       title: 'Developed Android app frontend in Kotlin',
-      order: 0,
+      order: 2,
       force_hide: false
     }],
     tags: [{
@@ -141,49 +160,49 @@
       },
       {
         title: TagNames.FLASK,
-        order: 0,
+        order: 2,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.SQL,
-        order: 0,
+        order: 4,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.POSTGRESQL,
-        order: 0,
+        order: 6,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.KOTLIN,
-        order: 0,
+        order: 8,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.UI,
-        order: 0,
+        order: 10,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.BACKEND,
-        order: 0,
+        order: 12,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.FRONTEND,
-        order: 0,
+        order: 14,
         force_hide: false,
         use_index: true
       }
     ],
     force_hide: true,
-    order: 0
+    order: 4
   },
   {
     title: 'ROS Robot Driver Station',
@@ -196,11 +215,11 @@
       force_hide: false
     }, {
       title: 'Implemented driver station in Python handling joystick input, high-level state control, and diagnostic info',
-      order: 0,
+      order: 2,
       force_hide: false
     }, {
       title: 'Implemented Robot Operating System (ROS) message publishing/subscribing to relay critical information to and from the robot',
-      order: 0,
+      order: 4,
       force_hide: false
     }],
     tags: [{
@@ -211,37 +230,37 @@
       },
       {
         title: TagNames.CONTROL_SYSTEMS,
-        order: 0,
+        order: 2,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.DATA_VISUALIZATION,
-        order: 0,
+        order: 4,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.UI,
-        order: 0,
+        order: 6,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.ROS,
-        order: 0,
+        order: 8,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.QT,
-        order: 0,
+        order: 10,
         force_hide: false,
         use_index: true
       }
     ],
     force_hide: false,
-    order: 0
+    order: 6
   },
   {
     title: 'Smart Headlamp',
@@ -254,15 +273,15 @@
       force_hide: false
     }, {
       title: 'Implemented Leap Motion Control using C++',
-      order: 0,
+      order: 2,
       force_hide: false
     }, {
       title: 'Set up onboard Rasperry Pi and Arduino to control motors, sensors, and lights',
-      order: 0,
+      order: 4,
       force_hide: false
     }, {
       title: 'Achieved second place, and received Leap Motion award',
-      order: 0,
+      order: 6,
       force_hide: false
     }],
     tags: [{
@@ -273,51 +292,53 @@
       },
       {
         title: TagNames.OPENCV,
-        order: 0,
+        order: 2,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.UI,
-        order: 0,
+        order: 4,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.MACHINE_LEARNING,
-        order: 0,
+        order: 6,
         force_hide: true,
         use_index: true
       },
       {
         title: TagNames.CONTROL_SYSTEMS,
-        order: 0,
+        order: 8,
         force_hide: true,
         use_index: true
       },
       {
         title: TagNames.CPP,
-        order: 0,
+        order: 10,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.ARDUINO,
-        order: 0,
+        order: 12,
         force_hide: false,
         use_index: true
       }
     ],
     force_hide: false,
-    order: 0
+    order: 8
   }
 ]; 
 </script>
 
-<Section {header} {force_hide} bind:show_controls>
-  {#if show_controls}
-    <SectionControls bind:force_hide/>
-    <ListControls bind:items/>
+<Section {header} {force_hide} bind:show_section_controls bind:show_list_controls>
+  {#if show_section_controls}
+    <SectionControls bind:force_hide on:close={()=>{show_section_controls=false}}/>
+  {/if}
+  {#if show_list_controls}
+    <ListControls bind:items on:close={()=>{show_list_controls=false;}}/>
   {/if}
   <ExperienceList bind:items work={false}/>
 </Section>

@@ -1,5 +1,14 @@
 <script>
   export let force_hide;
+  
+  import TrashIconButton from './TrashIconButton.svelte';
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+  const dispatchClose = () => {
+    dispatch('close');
+    /* console.log('close'); */
+  };
 </script>
 
 <style>
@@ -94,7 +103,10 @@
 </style>
 
 <div class='section-controls-outer'>
-  <h4>Section Controls</h4>
+  <div class="row">
+    <h4>Section Controls</h4>
+    <TrashIconButton on:click={dispatchClose}/>
+  </div>
   <label class="container">Force Hide Section
     <input type="checkbox" bind:checked={force_hide}>
     <span class="checkmark"></span>

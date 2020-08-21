@@ -1,36 +1,48 @@
 <svelte:options accessors={true}/>
 <script>
-  export let contentSettings;
-  $: contentSettings = items.map(i => {
-    let newObj = new Object();
-    newObj.title = i.title;
-    newObj.points = i.points;
-    newObj.order = i.order;
-    newObj.force_hide = i.force_hide;
-    return newObj;
-  });
+  export const contentSettings = () => {
+    return items;
+  };
+
+  /* $: console.log(`items: ${items}`); */
 
   import Section from './Section.svelte';
   import ExperienceList from '../components/ExperienceList.svelte';
   import ListControls from '../components/ListControls.svelte';
   import SectionControls from '../components/SectionControls.svelte';
-  import { TagNames, auto_populate_orders } from '../utils/settings.js';
+  import { TagNames } from '../utils/settings.js';
 
   let header = 'Work Experience';
   export let embedded=false;
 
   let force_hide = false;
-  let show_controls = false;
+  let show_section_controls = false;
+  let show_list_controls = false;
 
-  $: if ($auto_populate_orders || embedded){
-    populate_orders();
-  }
-
-  function populate_orders(){
-    for (let i=0; i<items.length; i++){
-      items[i].order = i;
-    }
-  }
+  export const setContentSettings = (itemSettings) => {
+    items.forEach(function (item) {
+      let s = itemSettings.find(i => {
+        if (i.title === item.title){
+          return true;
+        } 
+      });
+      if (s){ // if settings were found for this item
+        item.title_alt = s.title_alt;
+        item.order = s.order;
+        item.force_hide = s.force_hide;
+        item.tags = s.tags;
+        item.points.forEach(function (j) {
+          let p = s.points.find(x => x.title === j.title);
+          if (p){
+            j.title_alt = p.title_alt;
+            j.order = p.order;
+            j.force_hide = p.force_hide;
+          }
+        });
+      }
+    });
+    items = [...items];
+  };
 
   let items = [{
     title: 'Backr Inc.',
@@ -39,22 +51,27 @@
     date: 'June-Sep 2020',
     points: [{
         title: 'Architected PostgreSQL database with dockerized deployment to GCloud SQL',
-        order: 0,
+        order: 2,
         force_hide: false
       },
       {
         title: 'Designed, implemented Flask server handling social media ingestion, and performing analytics such as title classification. Deployed to Google Compute Engine',
-        order: 0,
+        order: 4,
         force_hide: false
       },
       {
         title: 'Developed NodeJS webserver deployed to Google AppEngine',
-        order: 0,
+        order: 6,
         force_hide: false
       },
       {
         title: 'Provided git integrated continuous deployment and comprehensive unit tests for each project',
-        order: 0,
+        order: 8,
+        force_hide: false
+      },
+      {
+        title: 'Pioneered []... / Technical lead of devops stuff',
+        order: 10,
         force_hide: false
       }
     ],
@@ -66,61 +83,61 @@
       },
       {
         title: TagNames.PYTHON,
-        order: 0,
+        order: 2,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.JS,
-        order: 0,
+        order: 4,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.GCLOUD,
-        order: 0,
+        order: 6,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.APPENGINE,
-        order: 0,
+        order: 8,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.POSTGRESQL,
-        order: 0,
+        order: 10,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.DOCKER,
-        order: 0,
+        order: 12,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.NODEJS,
-        order: 0,
+        order: 14,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.NLP,
-        order: 0,
+        order: 16,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.SQL,
-        order: 0,
+        order: 18,
         force_hide: false,
         use_index: true
       }
     ],
     force_hide: false,
-    order: 0
+    order: 2
   },
   {
     title: 'CIBC',
@@ -134,17 +151,17 @@
       },
       {
         title: 'Provided data visualiations by embedding Tableau dashboards into webapp in JS/SCSS/HTML',
-        order: 0,
+        order: 2,
         force_hide: false
       },
       {
         title: 'Improved fraud detection capabilities by creating a title classifier using spaCy, NLTK (Python)',
-        order: 0,
+        order: 4,
         force_hide: false
       },
       {
         title: 'Achieved "Above and Beyond" award for outstanding performance',
-        order: 0,
+        order: 6,
         force_hide: false
       }
     ],
@@ -156,61 +173,61 @@
       },
       {
         title: TagNames.SVELTE,
-        order: 0,
+        order: 2,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.JS,
-        order: 0,
+        order: 4,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.PYTHON,
-        order: 0,
+        order: 6,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.NLP,
-        order: 0,
+        order: 8,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.TABLEAU,
-        order: 0,
+        order: 10,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.UI,
-        order: 0,
+        order: 12,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.SQL,
-        order: 0,
+        order: 14,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.SCSS,
-        order: 0,
+        order: 16,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.SPACY,
-        order: 0,
+        order: 18,
         force_hide: false,
         use_index: true
       }
     ],
     force_hide: false,
-    order: 0
+    order: 4
   },
   {
     title: 'North Inc. (Formerly Thalmic Labs)',
@@ -224,17 +241,17 @@
       },
       {
         title: 'Created enhanced optical artifact simulator, using advanced OpenCV matrix calculations in C++',
-        order: 0,
+        order: 2,
         force_hide: false
       },
       {
         title: 'Improved effectiveness of material property lookup table by developing n-dimensional interpolation algorithm',
-        order: 0,
+        order: 4,
         force_hide: false
       },
       {
         title: 'Automated a laser test fixure by developing control software in Python & Arduino',
-        order: 0,
+        order: 6,
         force_hide: false
       }
     ],
@@ -246,34 +263,36 @@
       },
       {
         title: TagNames.OPENCV,
-        order: 0,
+        order: 2,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.PYTHON,
-        order: 0,
+        order: 4,
         force_hide: false,
         use_index: true
       },
       {
         title: TagNames.ARDUINO,
-        order: 0,
+        order: 6,
         force_hide: false,
         use_index: true
       }
     ],
     force_hide: false,
-    order: 0
+    order: 6
   }
 ];
 
 </script>
 
-<Section {header} {embedded} {force_hide} bind:show_controls>
-  {#if show_controls}
-    <SectionControls bind:force_hide/>
-    <ListControls bind:items/>
+<Section {header} {force_hide} bind:show_section_controls bind:show_list_controls>
+  {#if show_section_controls}
+    <SectionControls bind:force_hide on:close={()=>{show_section_controls=false}}/>
+  {/if}
+  {#if show_list_controls}
+    <ListControls bind:items on:close={()=>{show_list_controls=false;}}/>
   {/if}
   <ExperienceList bind:items {embedded} work={true}/>
 </Section>
