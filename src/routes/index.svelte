@@ -10,6 +10,7 @@
   import BackToTop from '../components/components/BackToTop.svelte';
   import Hamburger from '../components/components/Hamburger.svelte';
   import HamburgerModal from '../components/components/HamburgerModal.svelte';
+  import MobileMenubarModal from '../components/components/MobileMenubarModal.svelte';
 
   import { onMount } from 'svelte';
 
@@ -22,8 +23,10 @@
   let hamburgerOpen = false;
   let hamburgerModal;
   let mobileSidebarOpen = false;
+  let mobileSidebarModal;
 
   $: curSection = getCurrentSection(y);
+  $: console.log(y);
 
 	onMount(async () => {
     mounted = true;
@@ -51,6 +54,8 @@
     }
     y = y_temp;
   }
+  
+  $: scrolledFarEnoughToDisplayHamburger = y>300;
 
   const getCurrentSection = (y) => {
     let y_temp = y;
@@ -113,8 +118,21 @@
     <Menubar floaty={true} {sections} {curSection} on:move={move}/>
     {/if}
   {:else}
-    <Menubar floaty={false} addHamburger={true} bind:mobileSidebarOpen {sections} {curSection} on:move={move}/>
+    <Menubar mobile={true} bind:mobileSidebarOpen {y} {sections} {curSection} on:move={move}/>
+    <!-- >{#if scrolledFarEnoughToDisplayHamburger} -->
+      <!-- <MobileMenubarModal on:close="{() => mobileSidebarOpen = false}" bind:this={mobileSidebarModal}> -->
+      <!-- <Menubar {y} {sections} {curSection} bind:mobileSidebarOpen mobile={true}/> -->
+      <!-- </MobileMenubarModal> -->
+      <!-- <Hamburger bind:open={mobileSidebarOpen}/> -->
+      <!-- <div style='position:fixed; left:25px; top:25px; z-index: 999; background-color: #081012; padding: 2px 10px;'> -->
+      <!-- blah -->
+      <!-- <Hamburger bind:open={mobileSidebarOpen}/> -->
+      <!-- >{#if mobileSidebarOpen} -->
+      <!-- >{/if} -->
+      <!-- </div> -->
+      <!-- >{:else} -->
     <!-- <Hamburger fixed={true} bind:open={mobileSidebarOpen} modal={hamburgerModal}/> -->
+    <!-- {/if} -->
   {/if}
 {/if}
 
@@ -122,6 +140,3 @@
     <svelte:component this={section.component} bind:height={section.height} bg_color={getColor(section, n)} on:move={move}/>
   {/each}
   
-  <button style='position:fixed; left:0; top:30px; z-index: 999'>
-      blah
-    </button>

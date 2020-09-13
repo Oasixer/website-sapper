@@ -27,7 +27,7 @@
     text-transform: uppercase;
     color: #f3f5f4;
     font-weight: 100;
-    font-family: "DIN Condensed Web", "Open Sans", sans-serif;
+    font-family: "DIN Condensed Web", "Open Sans", "Helvetica" sans-serif;
     margin-bottom: 25px;
   }
 
