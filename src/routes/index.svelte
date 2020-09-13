@@ -137,6 +137,6 @@
 {/if}
 
   {#each sections as section, n}
-    <svelte:component this={section.component} bind:height={section.height} bg_color={getColor(section, n)} on:move={move}/>
+    <svelte:component this={section.component} bind:height={section.height} bg_color={getColor(section, n)} on:move={move} mobile={width<=maxMobileWidth}/>
   {/each}
   

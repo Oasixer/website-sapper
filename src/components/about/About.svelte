@@ -3,6 +3,7 @@
   
   let src_uw = './images/uw.png';
   export let bg_color;
+  export let mobile;
 </script>
 
 <style>
@@ -27,7 +28,7 @@
     text-transform: uppercase;
     color: #f3f5f4;
     font-weight: 100;
-    font-family: "DIN Condensed Web", "Open Sans", "Helvetica" sans-serif;
+    font-family: "DIN Condensed Web", "Open Sans", "Helvetica", sans-serif;
     margin-bottom: 25px;
   }
 

@@ -287,7 +287,7 @@
 
 </script>
 
-<Section {header} {force_hide} bind:show_section_controls bind:show_list_controls>
+<Section {header} {embedded} {force_hide} bind:show_section_controls bind:show_list_controls>
   {#if show_section_controls}
     <SectionControls bind:force_hide on:close={()=>{show_section_controls=false}}/>
   {/if}
