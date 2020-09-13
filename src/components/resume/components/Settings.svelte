@@ -23,7 +23,6 @@
     top_name_bottom_margin,
     top_name_font_size,
     force_display_skills_ignore_tags,
-    auto_populate_orders,
     TagNames
   } from '../utils/settings.js';
 
@@ -33,10 +32,12 @@
   /* const dispatch = createEventDispatcher(); */
   /* const dispatchGetContentSettings = () => {dispatch('getContentSettings');} */
   export let getContentSettings;
+  export let setContentSettings;
 
   export let modal;
 
   /* $: console.log({$tags}); */
+
 
   $: bools = [
     {
@@ -82,10 +83,6 @@
     {
       name: 'Disable interests section',
       store: disable_interests_section
-    },
-    {
-      name: 'Auto populate orders',
-      store: auto_populate_orders
     }
   ].sort((a,b)=>a.name<b.name?-1:1);
 
@@ -123,6 +120,8 @@
       store: top_name_bottom_margin
     }
   ].sort((a,b)=>a.name<b.name?-1:1);
+
+  let presets = [];
 
   function updateStoreValue(i){
     /* console.log(i); */
@@ -177,22 +176,24 @@
   function tagIsEnabled(tag){
     return {$tags}.includes(tag);
   }
-  
-  const moveFiles = () => {
-    let fileBuffer = [];
-    Array.prototype.push.apply(fileBuffer, fileInput.files);
-    let mapped = fileBuffer.map((i)=>{return{name: i.name, file:i}});
-    let names = fileBuffer.map((i)=> i.name); // for removing duplicates
-    fileInput.value = ''; // reset the fileInput
-    // TODO: some popup asking the user if they want to replace the duplicate file or not
-    files = files.filter((i) => !names.includes(i.name)); // remove duplicates
-    files = [...files, ...mapped]; // concatenate
-  }
 
+  
   let fileInput;
+
+  /* $: console.log(`files4real: ${files}`); */
 
   const attachFile = () => {
     fileInput.click();
+  }
+  
+  async function import_settings(){
+    console.log(`fileList len: ${fileInput.files.length}`);
+    const text = await fileInput.files[fileInput.files.length - 1].text();
+    console.log(`text: ${text}`);
+    let settings = JSON.parse(text);
+    console.log(`settings: ${settings}`);
+    presets.push(settings);
+    loadPreset(settings);
   }
 
   async function export_print(){
@@ -203,35 +204,48 @@
     disable_settings_button.set(false);
   }
   
-  function downloadFile(file){
-    let url = '/getFile/'+file.id;
-    let a = document.createElement("a");
-    a.href = url; // apparently this is actually a decent way to download files...
-    a.setAttribute("download", file.name);
-    // Set name when downloaded to everything following the _, ie. remove the file ID prefix from the filename
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+  function downloadFile(filename, text) {
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   }
   
-  async function import_settings(){
-    attachFile();
-  }
   
   async function export_settings(){
     console.log(fileInput.files)
     let json = new Object();
     json.settings = new Object();
-    const allSettings = [...bools, ...ints];
-    allSettings.forEach(function(i) {
-      json.settings[i.name] = getStoreValue(i)
+    json.settings.bools = new Object();
+    json.settings.ints = new Object();
+    bools.forEach(function(i) {
+      json.settings.bools[i.name] = getStoreValue(i)
+    });
+    ints.forEach(function(i) {
+      json.settings.ints[i.name] = getStoreValue(i)
     });
     
     /* let test = await dispatchGetContentSettings(); */
-    let test = await getContentSettings();
-    console.log(test);
-    
-    /* f = File(); */
+    let contentSettings = getContentSettings();
+    console.log(contentSettings);
+    json.contentSettings = contentSettings;
+
+    downloadFile('settings.json', JSON.stringify(json, null, 2));
+  }
+  
+  function loadPreset(preset){
+    for (const i in preset.settings.ints) {
+        /* console.log(`${i}: ${preset.settings.ints[i]}`); */
+        ints.find(j => j.name == i).store.set(preset.settings.ints[i]);
+    };
+    for (const i in preset.settings.bools) {
+        /* console.log(`${i}: ${preset.settings.ints[i]}`); */
+        bools.find(j => j.name == i).store.set(preset.settings.bools[i]);
+    };
+    setContentSettings(preset.contentSettings);
   }
   
 </script>
@@ -354,13 +368,13 @@ input[type="number"]{
   </div>
 </div>
 <button on:click={export_print}>Export to PDF by printing (select PDF)</button>
-<button on:click={export_settings}>Export settings to file</button>
-<button on:click={import_settings}>Import settings from a file</button>
+<button on:click={export_settings}>Export preset file</button>
+<button on:click={attachFile}>Import preset file</button>
 
 <input
   type="file"
   size="chars"
   style="display:block; display:none; visibility:hidden; width:0; height:0;"
   multiple
-  on:change={moveFiles}
+  on:change={import_settings}
   bind:this={fileInput}>

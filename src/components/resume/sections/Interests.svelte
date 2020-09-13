@@ -6,13 +6,22 @@
 
   let header = 'Interests';
   let items = [
-    {title: 'Competitive rock climber for 12 years', order: 0, force_hide: false},
-    {title: 'National Youth Circus alumni', order: 0, force_hide: false},
-    {title: 'Machining, woodworking', order: 0, force_hide: false},
-    {title: 'Rock climbing coach during high school', order: 0, force_hide: false},
+    {title: 'Competitive rock climber for 12 years', order: 2, force_hide: false},
+    {title: 'National Youth Circus alumni', order: 4, force_hide: false},
+    {title: 'Machining, woodworking', order: 6, force_hide: false},
+    {title: 'Rock climbing coach during high school', order: 8, force_hide: false},
   ];
 
-  let show_controls = false;
+  export const contentSettings = () => {
+    return items;
+  };
+
+  export const setContentSettings = (itemSettings) => {
+    items = [...itemSettings];
+  };
+
+  let show_section_controls = false;
+  let show_list_controls = false;
   let force_hide = false;
 </script>
 
@@ -22,10 +31,12 @@
   }
 </style>
 
-<Section {header} bind:show_controls {force_hide}>
-  {#if show_controls}
-    <SectionControls bind:force_hide/>
-    <ListControls bind:items/>
+<Section {header} {force_hide} bind:show_section_controls bind:show_list_controls>
+  {#if show_section_controls}
+    <SectionControls bind:force_hide on:close={()=>{show_section_controls=false}}/>
   {/if}
-  <AwardsInterestsPointList bind:items bind:show_controls/>
+  {#if show_list_controls}
+    <ListControls bind:items on:close={()=>{show_list_controls=false;}}/>
+  {/if}
+  <AwardsInterestsPointList bind:items bind:show_list_controls/>
 </Section>

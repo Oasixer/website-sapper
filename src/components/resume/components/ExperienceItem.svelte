@@ -5,6 +5,12 @@
 
   import ListControls from './ListControls.svelte';
   import ExpItemPointList from './ExpItemPointList.svelte';
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+  const dispatchRefresh = () => {dispatch('refresh')};
+  
+  let enable_section_controls = false;
 
   import { 
     show_project_locations,
@@ -13,15 +19,29 @@
     show_tags_under_experience,
     disable_categorical_tags,
     experience_content_font_size,
-    TagCategoryNames,
-    auto_populate_orders
+    TagCategoryNames
   } from '../utils/settings.js';
 
   let enable_tag_controls = false;
-  let enable_section_controls = false;
   let enable_exp_item_point_list_controls = false;
 
   let itemContainer = [item]; // for 2way binding in single subsection controls
+
+  /* $: console.log(`: ${item.points}`); */
+  function refreshCloseSectionControls(){
+    enable_section_controls = false;
+    dispatchRefresh();
+  }
+
+  function refreshClosePointList(){
+    enable_exp_item_point_list_controls = false;
+    dispatchRefresh();
+  }
+
+  function refreshCloseTags(){
+    enable_tag_controls = false;
+    dispatchRefresh();
+  }
 
   function toggle_tag_controls(){
     if (embedded){
@@ -29,13 +49,7 @@
     }
     enable_tag_controls = !enable_tag_controls;
   }
-  function toggle_secton_controls(){
-    if (embedded){
-      return;
-    }
-    enable_section_controls = !enable_section_controls;
-  }
-  
+
   $: tags_text = item.tags.concat().sort((a,b)=>a.order - b.order).filter(i=>{
     let disabled_because_cat = (TagCategoryNames.includes(i.title) && $disable_categorical_tags);
     let test = !(disabled_because_cat || i.force_hide);
@@ -140,14 +154,14 @@
 {#if !item.force_hide}
 <div class="experience-item-main">
   <div class="row">
-    <h1 class='title' class:darktheme={embedded} on:click={toggle_secton_controls}>{item.title}</h1>
+    <h1 class='title' class:darktheme={embedded} on:click={() => {enable_section_controls = true}}>{item.title}</h1>
     {#if (work || $show_project_locations) && (item.location != undefined)}
       <h1 class="location" class:darktheme={embedded}>{item.location}</h1>
     {/if}
   </div>
 
   {#if enable_section_controls}
-    <ListControls title='Experience Item Controls' single={true} bind:items={itemContainer}/>
+    <ListControls on:close={refreshCloseSectionControls} single={true} bind:items={itemContainer}/>
   {/if}
 
   <div class="row">
@@ -160,14 +174,14 @@
   </div>
 
   {#if enable_exp_item_point_list_controls}
-    <ListControls bind:items={item.points} title='ExpItem Point List Controls'/>
+    <ListControls bind:items={item.points} on:close={refreshClosePointList} title='ExpItem Point List Controls'/>
   {/if}
 
   <ExpItemPointList bind:embedded bind:items={item.points} bind:show_controls={enable_exp_item_point_list_controls} />
   {#if $show_tags_under_experience}
     <p class="experience-tags" class:darktheme={embedded} on:click={toggle_tag_controls}>{tags_text}</p>
     {#if enable_tag_controls}
-      <ListControls bind:items={item.tags}/>
+      <ListControls on:close={refreshCloseTags} bind:items={item.tags} title='Tag Controls'/>
     {/if}
   {/if}
 </div>
