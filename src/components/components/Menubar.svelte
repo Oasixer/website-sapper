@@ -2,6 +2,10 @@
   export let floaty;
   export let sections;
   export let curSection;
+  export let addHamburger=false;
+  export let mobileSidebarOpen=false;
+
+  import Hamburger from './Hamburger.svelte';
   import { onMount, createEventDispatcher } from 'svelte';
 	import { fly } from 'svelte/transition';
   
@@ -92,31 +96,49 @@
     color: #f3f5f4;
     outline: none;
   }
+
+  div.row{
+    width: 100%;
+    display: flex;
+  }
 </style>
 
-<div class='menubar' class:floaty transition:fly="{floaty?{y:-100, duration: 200}:''}">
-  <div class='group left' class:floaty>
-    {#each sectionsLeft as section, n}
-      <button
-        class:selected={curSection==n}
-        on:click={()=>runMoveDispatcher(n)}>
-        {section.name}
-      </button>
-    {/each}
+<div class='menubar' class:floaty style={addHamburger?'height: 50px':''} transition:fly="{floaty?{y:-100, duration: 200}:''}">
+  <div class='group left' style={addHamburger?'margin-left: 5px; margin-right: 0;':''} class:floaty>
+    {#if addHamburger}
+      <Hamburger bind:open={mobileSidebarOpen}/>
+    {:else}
+      {#each sectionsLeft as section, n}
+        <button
+          class:selected={curSection==n}
+          on:click={()=>runMoveDispatcher(n)}>
+          {section.name}
+        </button>
+      {/each}
+    {/if}
   </div>
   {#if !floaty}
-    <button class='selected' on:click={()=>runMoveDispatcher(0)}>
-    Kaelan Moffett
-    </button>
+    {#if addHamburger}
+      <div class='row'>
+        <button class='selected' style={addHamburger?'font-size: 17px; margin-left: 0;':''} on:click={()=>runMoveDispatcher(0)}>
+        Kaelan Moffett
+        </button>
+      </div>
+    {:else}
+      <button class='selected' on:click={()=>runMoveDispatcher(0)}>
+      Kaelan Moffett
+      </button>
+    {/if}
   {/if}
   <div class='group right' class:floaty>
-    {#each sectionsRight as section, n}
-      <button
-        class:selected={curSection==n+sectionsLeft.length}
-        on:click={()=>runMoveDispatcher(n+sectionsLeft.length)}>
-
-        {section.name}
-      </button>
-    {/each}
+    {#if !addHamburger}
+      {#each sectionsRight as section, n}
+        <button
+          class:selected={curSection==n+sectionsLeft.length}
+          on:click={()=>runMoveDispatcher(n+sectionsLeft.length)}>
+          {section.name}
+        </button>
+      {/each}
+    {/if}
   </div>
 </div>

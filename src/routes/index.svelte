@@ -8,13 +8,26 @@
   import ResumePage from '../components/resume/ResumePage.svelte';
   import SkillsPage from '../components/resume/SkillsPage.svelte';
   import BackToTop from '../components/components/BackToTop.svelte';
+  import Hamburger from '../components/components/Hamburger.svelte';
+  import HamburgerModal from '../components/components/HamburgerModal.svelte';
 
   import { onMount } from 'svelte';
 
   let y;
-  let curSection=0;
+  let width;
+  let height;
+  let curSection = 0;
+  let mounted = false;
+  let maxMobileWidth = 500;
+  let hamburgerOpen = false;
+  let hamburgerModal;
+  let mobileSidebarOpen = false;
 
   $: curSection = getCurrentSection(y);
+
+	onMount(async () => {
+    mounted = true;
+	});
 
   let sections = [
     {component: Home, name:'Home', excludeFromMenubar: false},
@@ -44,6 +57,7 @@
     for (let n=0;n<sections.length; n++){
       let i=sections[n];
       if (y_temp < i.height - 40){
+        console.log(n);
         return n;
       }
       else{
@@ -72,6 +86,14 @@
   :global(html){
     scroll-behavior: smooth;
   }
+
+  /* :global(main){ */
+    /* display: flex; */
+    /* flex-flow: column nowrap; */
+    /* background-color: #FFFFFF; */
+    /* margin: 0px; */
+    /* padding: 0px; */
+  /* } */
 </style>
 <!--  <svelte:head>
 <link href="//db.onlinewebfonts.com/c/69dbc1186412d7831b88d8a78a360360?family=DIN+Condensed+Web" rel="stylesheet" type="text/css"/>
@@ -81,14 +103,25 @@
 </svelte:head>  -->
 <title>Kaelan Moffett</title>
 
-<svelte:window bind:scrollY={y}/>
+<svelte:window bind:scrollY={y} bind:outerWidth={width} bind:outerHeight={height}/>
 
-<Menubar floaty={false} {sections} {curSection} on:move={move}/>
+{#if mounted}
+  {#if width > maxMobileWidth}
+    <Menubar floaty={false} {sections} {curSection} on:move={move}/>
 
-{#if curSection>0}
-<Menubar floaty={true} {sections} {curSection} on:move={move}/>
+    {#if curSection>0}
+    <Menubar floaty={true} {sections} {curSection} on:move={move}/>
+    {/if}
+  {:else}
+    <Menubar floaty={false} addHamburger={true} bind:mobileSidebarOpen {sections} {curSection} on:move={move}/>
+    <!-- <Hamburger fixed={true} bind:open={mobileSidebarOpen} modal={hamburgerModal}/> -->
+  {/if}
 {/if}
 
-{#each sections as section, n}
-  <svelte:component this={section.component} bind:height={section.height} bg_color={getColor(section, n)} on:move={move}/>
-{/each}
+  {#each sections as section, n}
+    <svelte:component this={section.component} bind:height={section.height} bg_color={getColor(section, n)} on:move={move}/>
+  {/each}
+  
+  <button style='position:fixed; left:0; top:30px; z-index: 999'>
+      blah
+    </button>
