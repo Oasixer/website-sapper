@@ -4,6 +4,20 @@
   let src_uw = './images/uw.png';
   export let bg_color;
   export let mobile;
+
+  let aboutElement;
+  let text=`I'm a Mechatronics Engineering student at University of Waterloo.
+I've been passionate about programming, control systems, and robotics since high school when I got hooked on FIRST Robotics.
+I love to design algorithms that solve difficult tasks, and I live for the satisfaction of closing a hundred chrome tabs when the test cases finally all pass.
+I have been a competitive climber for 10 years, and I especially enjoy outdoor rock climbing.`
+  
+  import { onMount } from 'svelte';
+  onMount(async => {
+    const bar = () => {
+      height = aboutElement.offsetHeight;
+    }
+    setTimeout(bar, 10);
+  });
 </script>
 
 <style>
@@ -22,6 +36,9 @@
     display: flex;
     flex-flow: column nowrap;
   }
+  div#about.mobile{
+    padding: 20px;
+  }
 
   h1{
     font-size: 70px;
@@ -32,29 +49,49 @@
     margin-bottom: 25px;
   }
 
+  h1.mobile{
+    font-size:24px;
+    font-weight: 500;
+    max-width:100%;
+    overflow-wrap: normal;
+  }
+
   p{
     color: #c3c4c5;
     width: 70%;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: "Source Sans Pro", "Helvetica", sans-serif;
     font-weight: 300;
-    line-height: 1.65
+    line-height: 1.65;
+    font-size: 20px;
+  }
+  p.mobile{
+    text-align: justify;
+    width: 100%;
+    font-weight: 400;
+    font-family: "Helvetica", serif;
+    font-size:18px;
   }
 
   img{
     width: 30%;
   }
+  img.mobile{
+    width: 100%;
+  }
+
 </style>
 <div id='about'
   style="background-color: {bg_color}"
-  bind:clientHeight={height}>
-  <h1>About Kaelan</h1>
-  <div class='row'>
-    <p>
-      I'm a Mechatronics Engineering student at University of Waterloo.
-      I've been passionate about programming, control systems, and robotics since high school when I got hooked on FIRST Robotics.
-      I love to design algorithms that solve difficult tasks, and I live for the satisfaction of closing a hundred chrome tabs when the test cases finally all pass.
-      I have been a competitive climber for 10 years, but my real drive in sports is outdoor rock climbing.
-    </p>
-    <img id='uw-pic' src={src_uw}/>
-  </div>
+  class:mobile
+  bind:this={aboutElement}
+  bind:offsetHeight={height}>
+  <h1 class:mobile>About Kaelan</h1>
+    {#if !mobile}
+      <div class='row'>
+        <p class:mobile>{text}</p>
+        <img alt='uw logo' id='uw-pic' src={src_uw}/>
+      </div>
+    {:else}
+      <p class:mobile>{text}</p>
+    {/if}
 </div>

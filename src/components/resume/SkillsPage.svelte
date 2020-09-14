@@ -1,7 +1,17 @@
 <script>
   export let bg_color;
   export let height=undefined;
+  export let mobile;
   import Skills from './sections/Skills.svelte';
+  
+  let skillsElement;
+  import { onMount, createEventDispatcher } from 'svelte';
+  onMount(async => {
+    const bar = () => {
+      height = skillsElement.offsetHeight;
+    }
+    setTimeout(bar, 10);
+  });
   
 </script>
 
@@ -13,19 +23,33 @@
     flex-flow: column nowrap;
   }
 
+  div#skills.mobile{
+    padding: 20px;
+  }
+
   h1{
     font-size: 70px;
     text-transform: uppercase;
     color: #f3f5f4;
     font-weight: 100;
-    font-family: "DIN Condensed Web", "Open Sans", sans-serif;
+    font-family: "DIN Condensed Web", "Open Sans", "Helvetica", sans-serif;
     margin-bottom: 25px;
+  }
+
+  h1.mobile{
+    font-size:24px;
+    font-weight: 500;
+    max-width:100%;
+    overflow-wrap: normal;
+    margin-bottom: 0px;
   }
 </style>
 
 <div id='skills'
   style="background-color: {bg_color}"
-  bind:clientHeight={height}>
-  <h1>Skills</h1>
-  <Skills embedded={true}/>
+  class:mobile
+  bind:this={skillsElement}
+  bind:offsetHeight={height}>
+  <h1 class:mobile>Skills</h1>
+  <Skills {mobile} embedded={true}/>
 </div>

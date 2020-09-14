@@ -3,6 +3,7 @@
     console.log(items[0].force_hide);
     return items;
   };
+  export let mobile;
   
   export const setContentSettings = (itemSettings) => {
     items.forEach(function (item) {
@@ -312,6 +313,11 @@
     font-size: 20px;
   }
 
+  h1.skills-section-title.mobile{
+    font-size: 16px;
+    font-weight: 600;
+  }
+
   p{
     margin: 0;
     font-weight: 200;
@@ -324,20 +330,20 @@
 </style>
 
 <Section {header} {embedded} {force_hide} bind:show_section_controls bind:show_list_controls>
-  {#if show_section_controls}
+  {#if show_section_controls && !embedded}
     <SectionControls bind:force_hide on:close={()=>{show_section_controls=false}}/>
   {/if}
-  {#if show_list_controls}
+  {#if show_list_controls && !embedded}
     <ListControls bind:items on:close={()=>{show_list_controls=false;}}/>
   {/if}
   {#each items.concat().sort((a, b) => a.order - b.order) as item, n}
     {#if should_display_pointlist(item, $tags)}
-      <h1 class="skills-section-title" class:darktheme={embedded}
+      <h1 class="skills-section-title" class:darktheme={embedded} class:mobile
       style="{(!embedded)?('font-size: '+$skills_headings_font_size+'px;'):''}"
          on:click={()=>{item.show_controls = !item.show_controls}}>
           {item.title_alt?item.title_alt:item.title}
       </h1>
-      {#if item.show_controls}
+      {#if item.show_controls && !embedded}
         <ListControls single={true} items={[item]} on:close={()=>{item.show_controls = false}}/>
       {/if}
         <p 
@@ -348,7 +354,7 @@
           ((!embedded)?('font-size: '+$skills_content_font_size+'px;'):'')} line-height: 1;">
         {item.tags.filter(i => !i.force_hide).sort(tag_sort).sort(order_sort).map(i => i.title_alt?i.title_alt:i.title).join(', ')}
       </p>
-      {#if item.show_tag_controls}
+      {#if item.show_tag_controls && !embedded}
         <ListControls title='Tag Controls' bind:items={item.tags} on:close={()=>{item.show_tag_controls=false}}/>
       {/if}
     {/if}

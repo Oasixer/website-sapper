@@ -1,8 +1,17 @@
 <script>
   export let height=undefined;
   import WorkExperience from './sections/WorkExperience.svelte';
-  
+  export let mobile;
+  import { onMount, createEventDispatcher } from 'svelte';
   export let bg_color;
+  
+  let workElement;
+  onMount(async => {
+    const bar = () => {
+      height = workElement.offsetHeight;
+    }
+    setTimeout(bar, 10);
+  });
 </script>
 
 <style>
@@ -12,20 +21,34 @@
     display: flex;
     flex-flow: column nowrap;
   }
+  
+  div#workexperience.mobile{
+    padding: 20px;
+  }
+
 
   h1{
     font-size: 70px;
     text-transform: uppercase;
     color: #f3f5f4;
     font-weight: 100;
-    font-family: "DIN Condensed Web", "Open Sans", sans-serif;
+    font-family: "DIN Condensed Web", "Open Sans", "Helvetica", sans-serif;
     margin-bottom: 25px;
+  }
+  h1.mobile{
+    font-size:24px;
+    font-weight: 500;
+    max-width:100%;
+    overflow-wrap: normal;
+    margin-bottom: 0px;
   }
 </style>
 
 <div id='workexperience'
+  class:mobile
   style="background-color: {bg_color}"
+  bind:this={workElement}
   bind:clientHeight={height}>
-  <h1>Work Experience</h1>
-  <WorkExperience embedded={true}/>
+  <h1 class:mobile>Work Experience</h1>
+  <WorkExperience embedded={true} {mobile}/>
 </div>

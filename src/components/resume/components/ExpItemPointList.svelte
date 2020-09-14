@@ -2,6 +2,7 @@
   export let items;
   import { experience_content_font_size } from '../utils/settings.js';
 
+  export let mobile;
   export let show_controls = false;
   export let embedded = false;
 
@@ -16,13 +17,17 @@
     margin: 0 0;
   }
 
+  ul.darktheme.mobile{
+    margin-top: 12px;
+  }
+
   li{
     margin: 0px 0px;
   }
   
   li.darktheme{
     color: #c0c0c0;
-    font-size: 18px;
+    font-size: 14px;
   }
   
   li:not(.darktheme){
@@ -32,9 +37,9 @@
 
 </style>
 
-<ul on:click={toggle_controls}>
+<ul class:darktheme={embedded} class:mobile on:click={toggle_controls}>
   {#each items.filter(i=>!i.force_hide).concat().sort((a,b)=>a.order - b.order) as i}
-    <li style="{(!embedded)?('font-size: '+$experience_content_font_size+'px'):''}">
+    <li class:darktheme={embedded} class:mobile style="{(!embedded)?('font-size: '+$experience_content_font_size+'px'):''}">
     {i.title_alt || i.title}
     </li>
   {/each}

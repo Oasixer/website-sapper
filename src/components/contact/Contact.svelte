@@ -3,6 +3,16 @@
   
   export let bg_color;
   export let height=undefined;
+  export let mobile;
+  
+  let contactElement;
+  import { onMount } from 'svelte';
+  onMount(async => {
+    const bar = () => {
+      height = contactElement.offsetHeight;
+    }
+    setTimeout(bar, 10);
+  });
 </script>
 
 <style>
@@ -15,13 +25,24 @@
     flex-flow: column nowrap;
   }
 
+  div#contact.mobile{
+    padding: 20px;
+  }
+
   h1{
     font-size: 70px;
     text-transform: uppercase;
     color: #f3f5f4;
     font-weight: 100;
-    font-family: "DIN Condensed Web", "Open Sans", sans-serif;
+    font-family: "DIN Condensed Web", "Open Sans", "Helvetica", sans-serif;
     margin-bottom: 25px;
+  }
+
+  h1.mobile{
+    font-size:24px;
+    font-weight: 500;
+    max-width:100%;
+    overflow-wrap: normal;
   }
 
   h2{
@@ -39,10 +60,14 @@
 </style>
 
 <div id='contact'
+  bind:this={contactElement}
   style="background-color: {bg_color}"
-  bind:clientHeight={height}>
-  <h1>contact</h1>
-  <h2>Kaelan Moffett-Steinke</h2>
+  class:mobile
+  bind:offsetHeight={height}>
+  <h1 class:mobile>contact</h1>
+  {#if !mobile}
+    <h2>Kaelan Moffett-Steinke</h2>
+  {/if}
   <Header embedded={true}/>
   <hr>
 </div>

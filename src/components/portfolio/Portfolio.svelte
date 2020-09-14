@@ -2,6 +2,9 @@
   import { onMount } from 'svelte';
   import ClickOutside from 'svelte-click-outside';
 
+  let portElement;
+  export let mobile;
+
   export let bg_color;
   export let height=undefined;
 
@@ -60,23 +63,37 @@
   }
 
   let cols=[];
-  let numCols = 3;
+  let numCols = mobile?2:3;
   
   onMount(async () => {
-    for (let i=0; i<numCols; i++){
-      cols.push([]);
-    }
-    let curCol=0;
-    let numFromTotal=0;
-    for (let i=0; i<items.length; i++){
-      items[i].numFromTotal = numFromTotal++;
-      cols[curCol].push(items[i]);
-      curCol = curCol == numCols-1 ? 0 : curCol+1;
-    }
-    cols = [...cols];
+    const setupCols = () =>{
+      numCols = mobile?2:3;
+      console.log(`mobile: ${mobile}`);
+      console.log(`numCols: ${numCols}`);
+      for (let i=0; i<numCols; i++){
+        cols.push([]);
+      }
+      let curCol=0;
+      let numFromTotal=0;
+      for (let i=0; i<items.length; i++){
+        items[i].numFromTotal = numFromTotal++;
+        cols[curCol].push(items[i]);
+        curCol = curCol == numCols-1 ? 0 : curCol+1;
+      }
+      cols = [...cols];
 
-    await sleep(0);
-    updateWidths();
+      cols.forEach(function (i) {
+        console.log(`len: ${i.length}`);
+      });
+    }
+    setTimeout(setupCols, 5);
+
+    setTimeout(updateWidths, 7);
+    
+    const bar = () => {
+      height = portElement.offsetHeight;
+    }
+    setTimeout(bar, 10);
   });
 
   async function updateWidths(){
@@ -116,6 +133,14 @@
     font-weight: 100;
     font-family: "DIN Condensed Web", "Open Sans", sans-serif;
     margin-bottom: 25px;
+  }
+
+  h1.mobile{
+    font-size: 24px;
+    font-weight: 500;
+    max-width:100%;
+    overflow-wrap: normal;
+    margin-bottom: 0px;
   }
 
   div.col{
@@ -187,6 +212,12 @@ scale-down: The smaller of either contain or none. */
     margin-top: 12px;
   }
 
+  h2.mobile{
+    font-size:15px;
+    height:3em;
+    font-weight:500;
+  }
+
   img.full{
     object-fit: cover;
     width: 500px;
@@ -251,10 +282,12 @@ scale-down: The smaller of either contain or none. */
 </style>
 
 <div id='portfolio'
+    bind:this={portElement}
     style="background-color: {bg_color}"
-    bind:clientHeight={height}
+    bind:offsetHeight={height}
+    class:mobile
     on:resize={()=>{console.log('test')}}>
-  <h1>Portfolio</h1>
+  <h1 class:mobile>Portfolio</h1>
   <div id='portfolio-inner'>
     {#each cols as col}
       <div class='col'>
@@ -265,7 +298,7 @@ scale-down: The smaller of either contain or none. */
               id={i.img.slice(0,i.img.length-4)}
               src={base + i.img}
               on:click={()=>{updateDisplayedItem(i.numFromTotal)}}/>
-            <h2>{i.title}</h2>
+            <h2 class:mobile>{i.title}</h2>
           </div>
         {/each}
       </div>

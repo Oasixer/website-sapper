@@ -4,6 +4,7 @@
     return items;
   };
 
+  export let mobile;
   /* $: console.log(`items: ${items}`); */
 
   import Section from './Section.svelte';
@@ -288,11 +289,11 @@
 </script>
 
 <Section {header} {embedded} {force_hide} bind:show_section_controls bind:show_list_controls>
-  {#if show_section_controls}
+  {#if show_section_controls && !embedded}
     <SectionControls bind:force_hide on:close={()=>{show_section_controls=false}}/>
   {/if}
-  {#if show_list_controls}
+  {#if show_list_controls && !embedded}
     <ListControls bind:items on:close={()=>{show_list_controls=false;}}/>
   {/if}
-  <ExperienceList bind:items {embedded} work={true}/>
+  <ExperienceList bind:items {embedded} {mobile} work={true}/>
 </Section>

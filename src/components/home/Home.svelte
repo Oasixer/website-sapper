@@ -1,6 +1,7 @@
 <script>
   export let height=undefined;
   export let bg_color; // unused bc we use a seperate color for home
+  export let mobile;
 
   import { onMount, createEventDispatcher } from 'svelte';
 
@@ -10,6 +11,14 @@
   let src_icesurf = './images/icesurf.jpg';
   let src_climb_2 = './images/climb_bad.jpg';
   let src_helmet = './images/helmet.jpg';
+  
+  let homeElement;
+  onMount(async => {
+    const bar = () => {
+      height = homeElement.offsetHeight;
+    }
+    setTimeout(bar, 10);
+  });
 </script>
 
 <style>
@@ -23,6 +32,9 @@
     display: flex;
     flex-flow: column nowrap;
     padding: 40px 15px 40px 15px;
+  }
+  div#home.mobile{
+    padding: 15px;
   }
 
   h1#title{
@@ -78,8 +90,10 @@
 }
 </style>
 
-<div id='home' bind:clientHeight={height}>
-  <h1 id='title'>Kaelan Moffett</h1>
+<div id='home' class:mobile bind:offsetHeight={height} bind:this={homeElement}>
+  {#if mobile == false}
+    <h1 id='title'>Kaelan Moffett</h1>
+  {/if}
   <div class="row">
     <div class="column">
       <img id='helmet-pic' src={src_helmet}/>

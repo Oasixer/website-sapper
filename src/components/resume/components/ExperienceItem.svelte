@@ -2,6 +2,7 @@
   export let item;
   export let work;
   export let embedded=false;
+  export let mobile;
 
   import ListControls from './ListControls.svelte';
   import ExpItemPointList from './ExpItemPointList.svelte';
@@ -63,6 +64,10 @@
     margin: 0 0 15px 0;
   }
 
+  .experience-item-main.darktheme.mobile{
+    margin-top: 17px;
+  }
+
   li:not(.darktheme){
     line-height: 1;
   }
@@ -77,6 +82,10 @@
   p.experience-tags.darktheme{
     color: #808080;
     font-size: 17px;
+  }
+
+  p.experience-tags.darktheme.mobile{
+    font-size: 15px;
   }
 
   div.row{
@@ -97,6 +106,11 @@
     font-size: 32px;
   }
 
+  .title.darktheme.mobile{
+    color: #0078b4;
+    font-size: 18px;
+  }
+
   .location{
     margin: 0;
     margin-left: auto;
@@ -110,17 +124,27 @@
     font-size: 18px;
     color: #0078b4;
   }
+  
+  .location.darktheme.mobile{
+    font-size: 17px;
+    color: #0078b4;
+    font-weight: 500;
+  }
 
   .position{
     margin: 0;
     color: #808080;
-    font: 11px roboto, sans-serif;
+    font-size: 11px;
+    font-family: "roboto", "helvetica", sans-serif;
     text-transform: uppercase;
     /* font-variant: small-caps; */
   }
 
   .position.darktheme{
     font-size: 17px;
+  }
+  .position.darktheme.mobile{
+    font-size: 13px;
   }
 
   .date{
@@ -134,6 +158,11 @@
 
   .date.darktheme{
     font-size: 17px;
+  }
+
+  .date.darktheme.mobile{
+    font-size: 14px;
+    font-weight: 500;
   }
 
   ul{
@@ -152,35 +181,35 @@
 </style>
 
 {#if !item.force_hide}
-<div class="experience-item-main">
+<div class:darktheme={embedded} class:mobile class="experience-item-main">
   <div class="row">
-    <h1 class='title' class:darktheme={embedded} on:click={() => {enable_section_controls = true}}>{item.title}</h1>
+    <h1 class='title' class:mobile class:darktheme={embedded} on:click={() => {enable_section_controls = true}}>{item.title}</h1>
     {#if (work || $show_project_locations) && (item.location != undefined)}
-      <h1 class="location" class:darktheme={embedded}>{item.location}</h1>
+      <h1 class="location" class:mobile class:darktheme={embedded}>{item.location}</h1>
     {/if}
   </div>
 
-  {#if enable_section_controls}
+  {#if enable_section_controls && !embedded}
     <ListControls on:close={refreshCloseSectionControls} single={true} bind:items={itemContainer}/>
   {/if}
 
   <div class="row">
     {#if (work || $show_project_positions) && (item.position != undefined)}
-      <h1 class="position" class:darktheme={embedded}>{item.position}</h1>
+      <h1 class="position" class:mobile class:darktheme={embedded}>{item.position}</h1>
     {/if}
     {#if (work || $show_project_dates) && (item.date != undefined)}
-      <h1 class="date" class:darktheme={embedded}>{item.date}</h1>
+      <h1 class="date" class:mobile class:darktheme={embedded}>{item.date}</h1>
     {/if}
   </div>
 
-  {#if enable_exp_item_point_list_controls}
+  {#if enable_exp_item_point_list_controls && !embedded}
     <ListControls bind:items={item.points} on:close={refreshClosePointList} title='ExpItem Point List Controls'/>
   {/if}
 
-  <ExpItemPointList bind:embedded bind:items={item.points} bind:show_controls={enable_exp_item_point_list_controls} />
+  <ExpItemPointList {embedded} {mobile} bind:items={item.points} bind:show_controls={enable_exp_item_point_list_controls} />
   {#if $show_tags_under_experience}
-    <p class="experience-tags" class:darktheme={embedded} on:click={toggle_tag_controls}>{tags_text}</p>
-    {#if enable_tag_controls}
+    <p class="experience-tags" class:mobile class:darktheme={embedded} on:click={toggle_tag_controls}>{tags_text}</p>
+    {#if enable_tag_controls && !embedded}
       <ListControls on:close={refreshCloseTags} bind:items={item.tags} title='Tag Controls'/>
     {/if}
   {/if}

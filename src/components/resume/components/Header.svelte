@@ -35,7 +35,7 @@
     <h1 
         style="font-size: {$top_name_font_size}em; margin: {$top_name_top_margin}px 0 {$top_name_bottom_margin}px 0"
         on:click>
-  Kaelan Moffett-Steinke</h1>
+        Kaelan Moffett-Steinke</h1>
   {/if}
   <!--  style="font-size: {$top_name_font_size}em; margin: {$top_name_top_margin}px 0 {$top_name_bottom_margin}px 0">  -->
   <LinkRow {embedded}/>
