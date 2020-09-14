@@ -54,7 +54,7 @@
     y = y_temp;
   }
   
-  /* $: scrolledFarEnoughToDisplayHamburger = y>300; */
+  $: scrolledFarEnoughToDisplayHamburger = y>250;
 
   const getCurrentSection = (y) => {
     let y_temp = y;
@@ -116,8 +116,11 @@
     <Menubar floaty={true} {sections} {curSection} on:move={move}/>
     {/if}
   {:else}
+    {#if scrolledFarEnoughToDisplayHamburger}
+      <div style='width:100%; height: 80px;'>
+      </div>
+    {/if}
     <Menubar mobile={true} bind:mobileSidebarOpen {y} {sections} {curSection} on:move={move}/>
-    <!-- >{#if scrolledFarEnoughToDisplayHamburger} -->
       <!-- <MobileMenubarModal on:close="{() => mobileSidebarOpen = false}" bind:this={mobileSidebarModal}> -->
       <!-- <Menubar {y} {sections} {curSection} bind:mobileSidebarOpen mobile={true}/> -->
       <!-- </MobileMenubarModal> -->

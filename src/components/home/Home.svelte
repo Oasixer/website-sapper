@@ -13,11 +13,13 @@
   let src_helmet = './images/helmet.jpg';
   
   let homeElement;
+  let mounted = false;
   onMount(async => {
     const bar = () => {
       height = homeElement.offsetHeight;
     }
     setTimeout(bar, 10);
+    mounted = true;
   });
 </script>
 
@@ -91,7 +93,7 @@
 </style>
 
 <div id='home' class:mobile bind:offsetHeight={height} bind:this={homeElement}>
-  {#if mobile == false}
+  {#if mobile === false && mounted}
     <h1 id='title'>Kaelan Moffett</h1>
   {/if}
   <div class="row">
