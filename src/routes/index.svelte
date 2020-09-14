@@ -26,7 +26,6 @@
   let mobileSidebarModal;
 
   $: curSection = getCurrentSection(y);
-  $: console.log(y);
 
 	onMount(async () => {
     mounted = true;
@@ -61,9 +60,7 @@
     let y_temp = y;
     for (let n=0;n<sections.length; n++){
       let i=sections[n];
-      console.log(`section ${i.name}: ${i.height}`);
       if (y_temp < i.height - 40){
-        console.log(n);
         return n;
       }
       else{
