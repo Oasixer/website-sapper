@@ -14,7 +14,7 @@
   let modal; // will be bound to modal instance
 
   import { orders, single_column, swap_columns, display_mode, disable_interests_section, disable_settings_button,
-  top_align_sections} from './utils/settings.js';
+  top_align_sections, limit_resume_height, show_11in_line} from './utils/settings.js';
 
   let allSections = [
   {
@@ -101,10 +101,15 @@
     padding: 0;
     display: flex;
     flex-flow: column nowrap;
-    overflow: hidden;
+    width: 8.5in;
+    max-width: 8.5in;
+    height: 11in;
+    max-height: 11in;
   }
 
   div.main-container{
+    /* width: 8.5in; */
+    /* max-width: 8.5in; */
     display: flex;
     flex-flow: row nowrap;
     margin: 0;
@@ -135,7 +140,7 @@
   }
 </style>
 
-<main>
+<main style="{$limit_resume_height?'overflow: hidden;':'overflow: visible;'+$show_11in_line?'border-bottom: 2px solid red;': 'border: none;'}">
   {#if !$disable_settings_button}
   <button id="modal-button" on:click="{() => showModal = true}">
     Show Settings

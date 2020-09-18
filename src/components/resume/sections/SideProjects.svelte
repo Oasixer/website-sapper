@@ -39,6 +39,60 @@
   let show_list_controls = false;
   let force_hide = false;
   let items = [{
+    title: 'Vent Board Firmware',
+    location: 'UW Rocketry - Electrical Team',
+    position: 'Programmer',
+    date: 'Aug 2020',
+    points: [{
+      title: 'Developed C firmware for PIC microcontroller',
+      order: 2,
+      force_hide: false
+    }, {
+      title: 'Handles valves which control the flow of fuel and oxidizer on board a rocket flying to 30,000 feet',
+      order: 4,
+      force_hide: false
+    }],
+    tags: [{
+        title: TagNames.C,
+        order: 2,
+        force_hide: false,
+        use_index: true
+    },
+    {
+        title: TagNames.EMBEDDED,
+        order: 4,
+        force_hide: false,
+        use_index: true
+    }
+    ],
+    force_hide: false,
+    order: -4
+  },
+
+    {
+    title: 'I3WM Emulator',
+    location: '',
+    position: 'Personal Project',
+    date: 'June 2020',
+    points: [{
+      title: 'Created Windows native emulator of popular Linux window manager i3 which uses MSVC in C++ for UI manipulation',
+      order: 2,
+      force_hide: false
+    }, {
+      title: 'Developed data structures to handle management logic using modern C++ techniques',
+      order: 4,
+      force_hide: false
+    }],
+    tags: [{
+        title: TagNames.CPP,
+        order: 6,
+        force_hide: false,
+        use_index: true
+      }],
+    force_hide: false,
+    order: -2
+  },
+  {
     title: 'Slack Chatbot (AWS)',
     location: 'UW Rocketry - Electrical Team',
     position: 'Programmer',

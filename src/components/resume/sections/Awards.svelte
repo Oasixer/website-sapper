@@ -6,6 +6,7 @@
 
   let header = 'Awards / Achievements';
   let items = [
+    {title: 'Waterloo Engineering Competition 2019 - 2nd place', order: 0, force_hide: false},
     {title: 'CIBC Employee Above & Beyond Award', order: 2, force_hide: false},
     {title: 'UTRAHacks 2018 - 2nd place', order: 4, force_hide: false},
     {title: 'University Bouldering Series 2018 - 2nd place', order: 6, force_hide: false},

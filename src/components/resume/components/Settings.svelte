@@ -23,7 +23,9 @@
     top_name_bottom_margin,
     top_name_font_size,
     force_display_skills_ignore_tags,
-    TagNames
+    TagNames,
+    limit_resume_height,
+    show_11in_line
   } from '../utils/settings.js';
 
   import { createEventDispatcher } from 'svelte';
@@ -83,6 +85,14 @@
     {
       name: 'Disable interests section',
       store: disable_interests_section
+    },
+    {
+      name: 'Limit resume height to 11in',
+      store: limit_resume_height
+    },
+    {
+      name: 'Show line at 11in (bottom of page height limit)',
+      store: show_11in_line
     }
   ].sort((a,b)=>a.name<b.name?-1:1);
 
@@ -198,6 +208,8 @@
 
   async function export_print(){
     disable_settings_button.set(true);
+    limit_resume_height.set(true);
+    show_11in_line.set(false);
     modal.close();
     await sleep(500);
     window.print();

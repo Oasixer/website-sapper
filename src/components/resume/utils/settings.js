@@ -5,7 +5,7 @@ export let TagNames = {
   PLC: 'PLC Programming',
   SOLDERING: 'Soldering',
   WIRING: 'Wiring',
-  CIRCUITS: 'Circuit Design/Analysis',
+  CIRCUITS: 'Circuit Design',
   FRONTEND: 'Frontend web development',
   BACKEND: 'Backend',
   CONTROL_SYSTEMS: 'Control systems',
@@ -55,6 +55,8 @@ export let TagNames = {
   CLOUD_RUN: 'CloudRun',
   COMPUTE_ENGINE: 'Compute Engine',
   NODEJS: 'NodeJS',
+  EMBEDDED: 'Embedded',
+  SEQUELIZE: 'Sequelize'
 }
 
 // For tags that are more categories than specific
@@ -84,6 +86,8 @@ export const disable_interests_section = writable(false);
 export const show_project_locations = writable(true);
 export const show_project_positions = writable(false);
 export const show_project_dates = writable(false);
+
+export const limit_resume_height = writable(false);
 
 export const swap_columns = writable(false);
 export const single_column = writable(false);
@@ -115,3 +119,5 @@ export const top_name_top_margin = writable("20");
 export const top_name_bottom_margin = writable("10");
 
 export const disable_settings_button = writable(true); // for printing / exporting to pdf
+
+export const show_11in_line = writable(true); // for printing / exporting to pdf

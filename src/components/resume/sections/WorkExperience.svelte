@@ -51,27 +51,22 @@
     position: 'Backend Developer',
     date: 'June-Sep 2020',
     points: [{
-        title: 'Architected PostgreSQL database with dockerized deployment to GCloud SQL',
+        title: "Designed the companies' main Postgres db and schema, implemented with SQLAlchemy ORM",
         order: 2,
         force_hide: false
       },
       {
-        title: 'Designed, implemented Flask server handling social media ingestion, and performing analytics such as title classification. Deployed to Google Compute Engine',
+        title: 'Designed and led a team to implement Flask server performing data ingestion 80% faster than previous model',
         order: 4,
         force_hide: false
       },
       {
-        title: 'Developed NodeJS webserver deployed to Google AppEngine',
+        title: 'Developed fullstack webapp using NodeJS + ReactJS stack',
         order: 6,
         force_hide: false
       },
       {
-        title: 'Provided git integrated continuous deployment and comprehensive unit tests for each project',
-        order: 8,
-        force_hide: false
-      },
-      {
-        title: 'Pioneered []... / Technical lead of devops stuff',
+        title: 'Pioneered company wide DevOps procedures as Git integrated CI, comprehensive unit & integration testing, using Docker to containerize applications',
         order: 10,
         force_hide: false
       }
