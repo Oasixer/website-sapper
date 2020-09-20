@@ -8,6 +8,7 @@
 
   function enable_controls(){
     show_section_controls=true;
+    show_list_controls=true;
   }
 </script>
 

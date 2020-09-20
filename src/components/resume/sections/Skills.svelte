@@ -4,6 +4,8 @@
     return items;
   };
   export let mobile;
+
+  $: console.log(items);
   
   export const setContentSettings = (itemSettings) => {
     items.forEach(function (item) {
@@ -11,7 +13,20 @@
       if (s){
         for (const property in s) {
           console.log(`${property}: ${s[property]}`);
-          item[property] = s[property];
+          if (property === 'tags'){
+            s.tags.forEach(function (tag) {
+              let tagSettings = s.tags.find(i => i.title == tag.title);
+              if (tagSettings){
+                for (const property in tagSettings) {
+                  /* console.log(`${property}: ${tagSettings[property]}`); */
+                  item.tags[property] = tagSettings[property];
+                };
+              }
+            });
+          }
+          else{
+            item[property] = s[property];
+          }
         };
       }
     });
@@ -51,6 +66,7 @@
         {title: TagNames.QT, order: 14, force_hide: false, use_index: true},
         {title: TagNames.PYQT, order: 16, force_hide: false, use_index: true},
         {title: TagNames.SELENIUM, order: 18, force_hide: false, use_index: true},
+        {title: TagNames.APPENGINE, order: 19, force_hide: false, use_index: true},
         {title: TagNames.LATEX, order: 20, force_hide: false, use_index: true},
         {title: TagNames.FRONTEND, order: 22, force_hide: true, use_index: true},
         {title: TagNames.UI, order: 24, force_hide: true, use_index: true}
@@ -70,9 +86,13 @@
         {title: TagNames.SQL, order: 10, force_hide: false, use_index: true},
         {title: TagNames.SEQUELIZE, order: 8, force_hide: false, use_index: true},
         {title: TagNames.ORACLEDB, order: 12, force_hide: false, use_index: true},
+        {title: TagNames.MONGODB, order: 11, force_hide: false, use_index: true},
         {title: TagNames.DOCKER, order: 14, force_hide: false, use_index: true},
         {title: TagNames.DYNAMODB, order: 16, force_hide: false, use_index: true},
-        {title: TagNames.BACKEND, order: 18, force_hide: true, use_index: true}
+        {title: TagNames.BACKEND, order: 18, force_hide: true, use_index: true},
+        {title: TagNames.GCLOUD, order: 19, force_hide: false, use_index: true},
+        {title: TagNames.CLOUD_SQL, order: 20, force_hide: false, use_index: true},
+        {title: TagNames.COMPUTE_ENGINE, order: 21, force_hide: false, use_index: true}
       ],
       show_controls: false,
       show_tag_controls: false,
@@ -86,7 +106,8 @@
         {title: TagNames.C, order: 6, force_hide: false, use_index: true},
         {title: TagNames.JS, order: 8, force_hide: false, use_index: true},
         {title: TagNames.ARDUINO, order: 10, force_hide: false, use_index: true},
-        {title: TagNames.BASH, order: 12, force_hide: false, use_index: true}
+        {title: TagNames.BASH, order: 12, force_hide: false, use_index: true},
+        {title: TagNames.VIMSCRIPT, order: 14, force_hide: false, use_index: true}
       ],
       show_controls: false,
       show_tag_controls: false,
@@ -138,7 +159,9 @@
     {
       title: 'Coursework',
       tags: [{title: 'Data Structures and Algorithms', order: 2, force_hide: false, use_index: false},
-        { title: 'Microprocessors', order: 4, force_hide: false, use_index: false}],
+        { title: 'Real Time Operating Systems', order: 0, force_hide: false, use_index: false},
+        { title: 'Microprocessors', order: 4, force_hide: false, use_index: false},
+        { title: 'Digital Computation', order: 0, force_hide: false, use_index: false}],
       show_controls: false,
       show_tag_controls: false,
       force_hide: true,

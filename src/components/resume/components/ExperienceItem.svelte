@@ -116,7 +116,7 @@
     margin-left: auto;
     color: purple;
     font-size: 15px;
-    font-weight: 100;
+    font-weight: 400;
     font-style: italic;
   }
 
@@ -152,7 +152,7 @@
     margin: 0;
     margin-left: auto;
     font-size: 15px;
-    font-weight: 100;
+    font-weight: 400;
     color: grey;
     font-style: italic;
   }

@@ -52,11 +52,14 @@ export let TagNames = {
   JQUERY: 'JQuery',
   GCLOUD: 'Google Cloud',
   APPENGINE: 'AppEngine',
-  CLOUD_RUN: 'CloudRun',
+  CLOUD_RUN: 'Cloud Run',
   COMPUTE_ENGINE: 'Compute Engine',
+  CLOUD_SQL: 'Cloud SQL',
   NODEJS: 'NodeJS',
   EMBEDDED: 'Embedded',
-  SEQUELIZE: 'Sequelize'
+  SEQUELIZE: 'Sequelize',
+  MONGODB: 'MongoDB',
+  VIMSCRIPT: 'Vimscript'
 }
 
 // For tags that are more categories than specific
