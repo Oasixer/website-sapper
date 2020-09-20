@@ -1,0 +1,47 @@
+<script>
+  import { createEventDispatcher } from 'svelte';
+  export let prev;
+  
+  import Icon from 'fa-svelte';
+  import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons/faChevronCircleRight';
+  import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons/faChevronCircleLeft';
+  let nextIcon = faChevronCircleRight;
+  let prevIcon = faChevronCircleLeft;
+  
+  const dispatch = createEventDispatcher();
+  const click = () => dispatch('click');
+
+</script>
+
+<style>
+  /* Invisible button that wraps around the X symbol for deleting stuff */
+  button{
+    z-index: 1000;
+    background-color: transparent;
+    border: none;
+    color: #0078b4;
+    font-weight: 500;
+    padding: 0px;
+    width: fit-content;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position: absolute;
+    font-size: 45px;
+    margin-top: -22px;
+    top:50%;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  button.prev{
+    left: -70px;
+  }
+  button.next{
+    right: -70px;
+  }
+
+</style>
+
+<button on:click class:next={!prev} class:prev>
+  <Icon icon={prev?prevIcon:nextIcon} />
+</button>
