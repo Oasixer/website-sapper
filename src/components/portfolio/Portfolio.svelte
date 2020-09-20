@@ -7,10 +7,13 @@
   let portElement;
   export let mobile;
 
+  $: console.log(displayedItem);
+
   export let bg_color;
   export let height=undefined;
 
   let base = './images/portfolio/';
+  let clickingPrev=false;
 
   let items=[
     {
@@ -119,6 +122,13 @@
   }
 
   function closeDisplay(){
+    if (clickingPrev){
+      // super jank fix for some particular bullshit where when clicking prev
+      // on the 1th element of the list, bc the prev button dissapears at that point
+      // which makes the clickOutside recognize it as being outside...
+      clickingPrev = false;
+      return;
+    }
     displayedItem = -1;
     console.log('close');
   }
@@ -286,8 +296,7 @@ scale-down: The smaller of either contain or none. */
   img.full{
     object-fit: cover;
     /* width: 500px; */
-    /* max-height: 300px; */
-    max-height: 100%;
+    max-height: 500px;
     max-width: 100%;
   }
 
@@ -400,16 +409,10 @@ scale-down: The smaller of either contain or none. */
 </div>
 
 {#if displayedItem != -1}
-    {#if displayedItem>0}
-      <!-- <div class='displayItem displaySide displayLeft'> -->
-      <!-- </div> -->
-      <!-- <NextButton prev={true} on:click={()=>{displayedItem-=1}}/> -->
-    {/if}
-    
     <ClickOutside on:clickoutside={closeDisplay} exclude={[]}>
       <div class='displayItem displayMain' class:mobile>
         {#if displayedItem>0 && !mobile}
-          <NextButton prev={true} on:click={()=>{displayedItem-=1}}/>
+          <NextButton prev={true} on:click={()=>{clickingPrev=displayedItem==1?true:false; displayedItem-=1;}}/>
         {/if}
         <TrashIconButton on:click={closeDisplay} {mobile}/>
         <h3 class='displayHeader' class:mobile>{items[displayedItem].title}</h3>

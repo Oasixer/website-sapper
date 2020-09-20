@@ -34,6 +34,9 @@
     right: 15px;
     font-size: 18px;
   }
+  button:active{
+    outline: none;
+  }
 
 </style>
 

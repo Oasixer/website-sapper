@@ -39,9 +39,17 @@
   button.next{
     right: -70px;
   }
+  button:active{
+    outline: none;
+  }
+  button:focus{
+    outline: none;
+  }
 
 </style>
 
-<button on:click class:next={!prev} class:prev>
-  <Icon icon={prev?prevIcon:nextIcon} />
-</button>
+<div style="margin: 0; padding: 0;" on:click>
+  <button class:next={!prev} class:prev>
+    <Icon icon={prev?prevIcon:nextIcon} />
+  </button>
+</div>
