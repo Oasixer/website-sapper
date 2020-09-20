@@ -23,6 +23,15 @@
       }
     },
     {
+      title: 'Backr Inc. Webapp and Analytics',
+      img: 'backr.png',
+      text: 'Developed NodeJS backend, and some components for the React+Redux webapp. Led the design and development of Flask server that handles data ingestion and analytics for customers. Designed main postgres db and schema which was implemented with SQLAlchemy in Python',
+      link: {
+        text: 'Go to website',
+        address: 'https://backr.space/'
+      }
+    },
+    {
       title: 'i3 Window Manager Emulator',
       img: 'i3wm.jpg',
       text: 'Windows native emulator of popular Linux window manager i3 which uses MSVC in C++ for UI manipulation',
@@ -38,6 +47,15 @@
       link: {
         text: 'View on github',
         address: 'https://github.com/ParthSareen/SmartLamp'
+      }
+    },
+    {
+      title: 'Rocket Microcontroller Firmware',
+      img: 'vent.png',
+      text: 'Handles valves which control the flow of fuel and oxidizer on board a rocket flying to 30,000 feet. Firmware for PIC microcontroller, written in C. Communicates via CAN bus with the rest of the rocket, and the remote launch control system.',
+      link: {
+        text: 'View on github',
+        address: 'https://github.com/waterloo-rocketry/cansw_vent/tree/v2-dev'
       }
     },
     {
@@ -117,7 +135,7 @@
     }
     const setupCols = () =>{
       cols = [];
-      numCols = mobile?2:3;
+      numCols = mobile?1:3;
       console.log(`mobile: ${mobile}`);
       console.log(`numCols: ${numCols}`);
       for (let i=0; i<numCols; i++){
