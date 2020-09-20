@@ -37,7 +37,7 @@ I have been a competitive climber for 10 years, and I especially enjoy outdoor r
     flex-flow: column nowrap;
   }
   div#about.mobile{
-    padding: 20px;
+    padding: 50px 20px 60px 20px;
   }
 
   h1{

@@ -21,12 +21,13 @@
     background-color: #161a28;
     padding: 70px;
     padding-bottom: 75px;
+    padding-top: 90px;
     display: flex;
     flex-flow: column nowrap;
   }
 
   div#contact.mobile{
-    padding: 20px;
+    padding: 80px 20px 80px 20px;
   }
 
   h1{

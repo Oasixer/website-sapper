@@ -12,12 +12,12 @@
 <style>
   div#resumepage{
     width: 100%;
-    padding: 70px;
+    padding: 70px 70px 140px 70px;
     display: flex;
     flex-flow: column nowrap;
   }
   div#resumepage.mobile{
-    padding: 20px;
+    padding: 50px 20px 60px 20px;
   }
 
   h1{
