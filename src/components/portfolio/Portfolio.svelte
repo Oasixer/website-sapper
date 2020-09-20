@@ -34,7 +34,7 @@
     {
       title: 'i3 Window Manager Emulator',
       img: 'i3wm.jpg',
-      text: 'Windows native emulator of popular Linux window manager i3 which uses MSVC in C++ for UI manipulation',
+      text: 'Windows native emulator of popular Linux window manager i3. Developed using MSVC in C++ for UI manipulation',
       link: {
         text: 'View on github',
         address: 'https://github.com/Oasixer/i3_emu'
@@ -192,6 +192,9 @@
     display: flex;
     flex-flow: column nowrap;
   }
+  div#portfolio.mobile{
+    padding: 50px 20px 60px 20px;
+  }
   
   div#portfolio-inner{
     display: flex;
@@ -256,6 +259,9 @@ scale-down: The smaller of either contain or none. */
     object-position: 50% 0;
     /* transform: scale(2); */
     /* overflow: hidden; */
+  }
+  img#backr{
+    object-position: 30% 0;
   }
 
   h2{

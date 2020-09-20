@@ -24,7 +24,7 @@
   }
 
   div#skills.mobile{
-    padding: 20px;
+    padding: 60px 20px 60px 20px;
   }
 
   h1{
@@ -41,7 +41,7 @@
     font-weight: 500;
     max-width:100%;
     overflow-wrap: normal;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
   }
 </style>
 

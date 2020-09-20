@@ -23,7 +23,7 @@
   }
   
   div#workexperience.mobile{
-    padding: 20px;
+    padding: 60px 20px 60px 20px;
   }
 
 
@@ -40,7 +40,7 @@
     font-weight: 500;
     max-width:100%;
     overflow-wrap: normal;
-    margin-bottom: 0px;
+    margin-bottom: 7px;
   }
 </style>
 

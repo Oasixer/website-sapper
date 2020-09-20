@@ -6,6 +6,8 @@
   export let mobileSidebarOpen=false;
   export let y;
 
+  let width;
+
   import Hamburger from './Hamburger.svelte';
   import { onMount, createEventDispatcher } from 'svelte';
 	import { fly } from 'svelte/transition';
@@ -24,6 +26,7 @@
   $: sectionsLeft = sections.slice(0,2).filter(i=>!i.excludeFromMenubar);
   $: sectionsRight = sections.slice(2).filter(i=>!i.excludeFromMenubar);
   $: floaty = mobile ? y > 250 : floaty;
+  /* $: widthLT = Math.ceil(width / 50)*50 */
 
   function runMoveDispatcher(n){
     dispatcher({n:n});
@@ -47,6 +50,8 @@
     display: flex;
     margin: 0;
     align-items: center;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   div#singleButton{
@@ -81,15 +86,15 @@
     align-items: center;
     justify-content: space-between;
   }
-
-  button.mobileButton{
-    /* width: 100vw; */
-  }
   
   div.menubar.floaty{
     position: fixed;
     top: 0;
     z-index: 5;
+  }
+
+  div.menubar.smaller button{
+    font-size: 2.3vw;
   }
 
   div.group{
@@ -103,10 +108,21 @@
     margin-left: 30px;
     margin-right: auto;
   }
+
+  div.menubar.smaller div.left{
+    margin-left: 13px;
+  }
+
   div.left.floaty{
     margin-left: auto;
     margin-right: 0;
   }
+  
+  div.menubar.smaller.floaty div.left{
+    margin-left: auto;
+    margin-right: 0;
+  }
+
   
   div.right{
     margin-left: auto;
@@ -122,6 +138,7 @@
   button{
     border: none;
     background: none;
+    outline: none;
     cursor: pointer;
     color: #50555d;
     text-transform: uppercase;
@@ -129,6 +146,14 @@
     font-size: 22px;
     font-family: "Open Sans", sans-serif;
     margin: 0;
+    padding: 9px;
+  }
+
+  div.menubar.smaller button{
+    padding: 9px 5px;
+  }
+  
+  div.menubar.floaty.smaller button{
     padding: 9px;
   }
 
@@ -143,6 +168,9 @@
 
   button.selected{
     color: #f3f5f4;
+    outline: none;
+  }
+  button.selected:focus{
     outline: none;
   }
 
@@ -176,8 +204,12 @@
     100% {opacity:1;}
   }
 </style>
-<!-- style={mobile?mobileSidebarOpen?'':'height: 50px':''} -->
-<div class='menubar' class:floaty id={mobile?mobileSidebarOpen?'vertical':y>displayHamburgerHeight?'singleButton':'mobileMenubar':'desktopMenubar'} transition:fly="{floaty?{y:-100, duration: 200}:''}">
+<svelte:window bind:outerWidth={width}/>
+<div class='menubar'
+     class:floaty
+     class:smaller={width<950 && !mobile}
+     id={mobile?mobileSidebarOpen?'vertical':y>displayHamburgerHeight?'singleButton':'mobileMenubar':'desktopMenubar'}
+     transition:fly="{floaty?{y:-100, duration: 200}:''}">
   {#if mobile}
     <div style="{(mobileSidebarOpen || !floaty)?'position: absolute; left: 20px; top: 26px;':''}">
       <Hamburger bind:open={mobileSidebarOpen}/>
