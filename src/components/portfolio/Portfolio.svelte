@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte';
   import ClickOutside from 'svelte-click-outside';
+  import TrashIconButton from './TrashIconButton.svelte';
+  import NextButton from './NextButton.svelte';
 
   let portElement;
   export let mobile;
@@ -14,38 +16,97 @@
     {
       title: 'Live Rocket Data Visualiser',
       img: 'plotly.png',
-      text: 'Visualisation dashboard for UW Rocketry to display live sensor data. Developed data transfer protocol for realtime transmission of rocket sensor data. Improved analysis capabilities by creating data visualizations with D3.js graphs encapsulated as Python Plotly Dash components'
+      text: 'Visualisation dashboard for UW Rocketry to display live sensor data. Developed data transfer protocol for realtime transmission of rocket sensor data. Improved analysis capabilities by creating data visualizations with D3.js graphs encapsulated as Python Plotly Dash components',
+      link: {
+        text: 'View on github',
+        address: 'https://github.com/waterloo-rocketry/rlcs-daq-plotting'
+      }
+    },
+    {
+      title: 'Backr Inc. Webapp and Analytics',
+      img: 'backr.png',
+      text: 'Developed NodeJS backend, and some components for the React+Redux webapp. Led the design and development of Flask server that handles data ingestion and analytics for customers. Designed main postgres db and schema which was implemented with SQLAlchemy in Python',
+      link: {
+        text: 'Go to website',
+        address: 'https://backr.space/'
+      }
+    },
+    {
+      title: 'i3 Window Manager Emulator',
+      img: 'i3wm.jpg',
+      text: 'Windows native emulator of popular Linux window manager i3 which uses MSVC in C++ for UI manipulation',
+      link: {
+        text: 'View on github',
+        address: 'https://github.com/Oasixer/i3_emu'
+      }
     },
     {
       title: 'Smart Headlamp',
       img: 'smartheadlamp_cropped.jpg',
-      text: 'Gesture controlled headlamp with deep learning facial recognition via Haar Cascades in OpenCV. Implemented Leap Motion Control using C++. Set up onboard Rasperry Pi and Arduino to control motors, sensors, and lights. Achieved second place, and received Leap Motion award.'
+      text: 'Gesture controlled headlamp with deep learning facial recognition via Haar Cascades in OpenCV. Implemented Leap Motion Control using C++. Set up onboard Rasperry Pi and Arduino to control motors, sensors, and lights. Achieved second place, and received Leap Motion award.',
+      link: {
+        text: 'View on github',
+        address: 'https://github.com/ParthSareen/SmartLamp'
+      }
+    },
+    {
+      title: 'Rocket Microcontroller Firmware',
+      img: 'vent.png',
+      text: 'Handles valves which control the flow of fuel and oxidizer on board a rocket flying to 30,000 feet. Firmware for PIC microcontroller, written in C. Communicates via CAN bus with the rest of the rocket, and the remote launch control system.',
+      link: {
+        text: 'View on github',
+        address: 'https://github.com/waterloo-rocketry/cansw_vent/tree/v2-dev'
+      }
     },
     {
       title: 'ROS Robot Driver Station',
       img: 'driverstation.png',
-      text: 'Lead the design and development of a QT application which provides a human interface to the robot simulator. Implemented driver station in Python handling joystick input, high-level state control, and diagnostic info. Implemented Robot Operating System (ROS) message publishing/subscribing to relay critical information to and from the robot'
+      text: 'Lead the design and development of a QT application which provides a human interface to the robot simulator. Implemented driver station in Python handling joystick input, high-level state control, and diagnostic info. Implemented Robot Operating System (ROS) message publishing/subscribing to relay critical information to and from the robot',
+      link: {
+        text: 'View on github',
+        address: 'https://github.com/uwreact/frc_control'
+      }
+    },
+    {
+      title: '3D Printer Firmware',
+      img: 'printer.jpg',
+      text: 'Made a 3D printer powered by lego motors, programmed all of the firmware in RobotC',
+      link: {
+        text: 'View on github',
+        address: 'https://github.com/Oasixer/Lego-3D-Printer'
+      }
     },
     {
       title: 'Ri3D 2020',
       img: 'ri3d2020.jpg',
-      text: 'Built FRC robot in three days.'
+      text: 'Built FRC robot in three days as a design challenge meeting the specifications of the 2020 FRC season.',
+      link: {
+        text: 'View design overview on youtube',
+        address: 'https://www.youtube.com/watch?v=DPRAkP-DxO4'
+      }
     },
     {
       title: 'Ri3D 2019',
       img: 'ri3d2019.jpg',
-      text: 'Built FRC robot in three days.'
+      text: 'Built FRC robot in three days as a design challenge meeting the specifications of the 2019 FRC season.',
+      link: {
+        text: 'View reveal video on youtube',
+        address: 'https://www.youtube.com/watch?v=pCWp0QOOZ8k'
+      }
     },
     {
       title: 'First Robotics 2018',
       img: 'frc2018.jpg',
-      text: 'Alliance captain and division winner at 2018 World Championships. Implemented autonomous pathfinding in Java. Used SolidWorks to design robot components. Machined mechanical components out of aluminum.'
+      text: 'Alliance captain and division winner at 2018 World Championships. Implemented autonomous pathfinding in Java. Used SolidWorks to design robot components. Machined mechanical components out of aluminum.',
+      link: {
+        text: 'View match footage on youtube',
+        address: 'https://youtu.be/LTzrw8Kwz3Y?t=77'
+      }
     },
     {
       title: 'First Robotics 2017',
       img: 'frc2017.jpg',
       text: 'Programmed robot controls in Java, Used SolidWorks to design robot components. Machined mechanical components out of aluminum.'
-
     }
   ];
   
@@ -64,10 +125,17 @@
 
   let cols=[];
   let numCols = mobile?2:3;
-  
-  onMount(async () => {
+  let mounted=false;
+  $: flowColumnsAssignHeight(mobile);
+
+  function flowColumnsAssignHeight(){
+    console.log(`flowColumns - mobile: ${mobile}`);
+    if (!mounted){
+      return;
+    }
     const setupCols = () =>{
-      numCols = mobile?2:3;
+      cols = [];
+      numCols = mobile?1:3;
       console.log(`mobile: ${mobile}`);
       console.log(`numCols: ${numCols}`);
       for (let i=0; i<numCols; i++){
@@ -94,6 +162,12 @@
       height = portElement.offsetHeight;
     }
     setTimeout(bar, 10);
+    console.log('cols');
+  }
+  
+  onMount(async () => {
+    mounted=true;
+    flowColumnsAssignHeight();
   });
 
   async function updateWidths(){
@@ -174,7 +248,7 @@ none: The image is not resized at all, and the original image size fills the giv
 scale-down: The smaller of either contain or none. */
   }
 
-  img#plotly{
+  img{
     /* object-position: L/R, T/B */
     object-position: 50% 50%;
   }
@@ -182,21 +256,6 @@ scale-down: The smaller of either contain or none. */
     object-position: 50% 0;
     /* transform: scale(2); */
     /* overflow: hidden; */
-  }
-  img#driverstation{
-    object-position: 50% 50%;
-  }
-  img#ri3d2020{
-    object-position: 50% 50%;
-  }
-  img#ri3d2019{
-    object-position: 50% 50%;
-  }
-  img#frc2018{
-    object-position: 50% 50%;
-  }
-  img#frc2017{
-    object-position: 50% 50%;
   }
 
   h2{
@@ -220,8 +279,10 @@ scale-down: The smaller of either contain or none. */
 
   img.full{
     object-fit: cover;
-    width: 500px;
-    max-height: 300px;
+    /* width: 500px; */
+    /* max-height: 300px; */
+    max-height: 100%;
+    max-width: 100%;
   }
 
   #full-frc2018{
@@ -229,13 +290,17 @@ scale-down: The smaller of either contain or none. */
     object-position: 50% 40%;
   }
 
-  /* not mobile */
   div.displayItem{
     background-color: white;
-    z-index: 6;
+    z-index: 1000;
     display: flex;
     flex-flow: column nowrap;
-    align-items: center;
+    /* align-items: center; */
+    padding: 0px 15px 20px 15px;
+  }
+
+  div.displayItem.mobile{
+    padding: 0px 5px 10px 5px;
   }
 
   div.displayMain{
@@ -244,25 +309,46 @@ scale-down: The smaller of either contain or none. */
     left: 50%;
     transform: translate(-50%, -50%);
     width: 680px;
-    height: 96vh;
+    max-width: 90%;
+    max-height: 96vh;
   }
   
-  div.displaySide{
-    display: fixed;
-    width: 80px;
-  }
+  /* div.displaySide{ */
+    /* display: fixed; */
+    /* width: 80px; */
+  /* } */
   
-  div.displayRight{
-    right: 0;
-  }
+  /* div.displayRight{ */
+    /* right: 0; */
+  /* } */
   
-  div.displayLeft{
-    left: 0;
-  }
+  /* div.displayLeft{ */
+    /* left: 0; */
+  /* } */
 
   .displayText{
     width: 500px;
-    margin-top: 30px;
+    margin: 20px 0px 0px 0px;
+  }
+  .displayText.mobile{
+    width: 100%;
+  }
+
+  div.displayItem a{
+    margin: 10px 0px 0px 0px;
+    color: blue;
+  }
+  div.displayItem a:link{
+    color: blue;
+  }
+  div.displayItem a:visited{
+    color: darkblue;
+  }
+  div.displayItem a:hover{
+    color: cyan;
+  }
+  div.displayItem a.mobile{
+
   }
   
   /* mobile */
@@ -275,7 +361,7 @@ scale-down: The smaller of either contain or none. */
   .displayHeader{
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
-    margin: 30px 30px;
+    margin: 30px 0px;
     margin-right: auto;
     font-size: 25px;
   }
@@ -294,6 +380,7 @@ scale-down: The smaller of either contain or none. */
         {#each col as i}
           <div class='card'>
             <img
+              alt='{i.img}'
               class='thumb'
               id={i.img.slice(0,i.img.length-4)}
               src={base + i.img}
@@ -308,29 +395,47 @@ scale-down: The smaller of either contain or none. */
 
 {#if displayedItem != -1}
     {#if displayedItem>0}
-      <div class='displayItem displaySide displayLeft'>
-      </div>
+      <!-- <div class='displayItem displaySide displayLeft'> -->
+      <!-- </div> -->
+      <!-- <NextButton prev={true} on:click={()=>{displayedItem-=1}}/> -->
     {/if}
     
     <ClickOutside on:clickoutside={closeDisplay} exclude={[]}>
-      <div class='displayItem displayMain'>
-        <h3 class='displayHeader'>{items[displayedItem].title}</h3>
+      <div class='displayItem displayMain' class:mobile>
+        {#if displayedItem>0 && !mobile}
+          <NextButton prev={true} on:click={()=>{displayedItem-=1}}/>
+        {/if}
+        <TrashIconButton on:click={closeDisplay} {mobile}/>
+        <h3 class='displayHeader' class:mobile>{items[displayedItem].title}</h3>
         <!--  <div class='full-img-container'>  -->
           <img
             class='full'
+            class:mobile
+            alt='{items[displayedItem].img}'
             id={'full-'+items[displayedItem].img.slice(0,items[displayedItem].img.length-4)}
             src={base + items[displayedItem].img}
             on:click={()=>{updateDisplayedItem(items[displayedItem].numFromTotal)}}/>
             <!--  </div>  -->
-          <p class='displayText'>{items[displayedItem].text}</p>
-
+          <p class='displayText' class:mobile>{items[displayedItem].text}</p>
+          {#if items[displayedItem].link}
+            <a href="{items[displayedItem].link.address}" class:mobile
+            target="_blank">
+              {items[displayedItem].link.text}
+            </a>
+          {/if}
+        {#if displayedItem<items.length-1 && !mobile}
+          <NextButton prev={false} on:click={()=>{displayedItem+=1}}/>
+        {/if}
       </div>
     </ClickOutside>
 
-    {#if displayedItem<items.length-1}
-      <div class='displayItem displaySide displayRight'>
-      </div>
-    {/if}
+    <!-- >{#if displayedItem<items.length-1} -->
+    <!-- <NextButton prev={true} on:click={()=>{displayedItem-=1}}/> -->
+      <!-- >{#if !mobile} -->
+      <!-- <div class='displayItem displaySide displayRight'> -->
+      <!-- </div> -->
+      <!-- >{/if} -->
+      <!-- >{/if} -->
 {/if}
 
 <svelte:window on:resize={updateWidths}/>

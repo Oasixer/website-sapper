@@ -123,6 +123,7 @@
   .location.darktheme{
     font-size: 18px;
     color: #0078b4;
+    font-weight: 500;
   }
   
   .location.darktheme.mobile{
@@ -158,6 +159,8 @@
 
   .date.darktheme{
     font-size: 17px;
+    color: grey;
+    font-weight: 500;
   }
 
   .date.darktheme.mobile{

@@ -44,11 +44,11 @@
     position: 'Programmer',
     date: 'Aug 2020',
     points: [{
-      title: 'Developed C firmware for PIC microcontroller',
+      title: 'Developed C firmware for PIC microcontroller on board a rocket flying to 30,000 feet',
       order: 2,
       force_hide: false
     }, {
-      title: 'Handles valves which control the flow of fuel and oxidizer on board a rocket flying to 30,000 feet',
+      title: 'Handles valves which control the flow of fuel and oxidizer, communicating with other components via CAN Bus',
       order: 4,
       force_hide: false
     }],
