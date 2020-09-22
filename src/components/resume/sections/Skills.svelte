@@ -83,11 +83,11 @@
         {title: TagNames.AWS, order: 4, force_hide: false, use_index: true},
         {title: TagNames.POSTGRESQL, order: 6, force_hide: false, use_index: true},
         {title: TagNames.SQLALCHEMY, order: 8, force_hide: false, use_index: true},
-        {title: TagNames.SQL, order: 10, force_hide: false, use_index: true},
+        {title: TagNames.SQL, order: 10, force_hide: true, use_index: true},
         {title: TagNames.SEQUELIZE, order: 8, force_hide: false, use_index: true},
         {title: TagNames.ORACLEDB, order: 12, force_hide: false, use_index: true},
         {title: TagNames.MONGODB, order: 11, force_hide: false, use_index: true},
-        {title: TagNames.DOCKER, order: 14, force_hide: false, use_index: true},
+        {title: TagNames.DOCKER, order: 14, force_hide: true, use_index: true},
         {title: TagNames.DYNAMODB, order: 16, force_hide: false, use_index: true},
         {title: TagNames.BACKEND, order: 18, force_hide: true, use_index: true},
         {title: TagNames.GCLOUD, order: 19, force_hide: false, use_index: true},
@@ -107,7 +107,7 @@
         {title: TagNames.JS, order: 8, force_hide: false, use_index: true},
         {title: TagNames.ARDUINO, order: 10, force_hide: false, use_index: true},
         {title: TagNames.BASH, order: 12, force_hide: false, use_index: true},
-        {title: TagNames.VIMSCRIPT, order: 14, force_hide: false, use_index: true}
+        {title: TagNames.VIMSCRIPT, order: 14, force_hide: false, use_index: true},
       ],
       show_controls: false,
       show_tag_controls: false,
@@ -123,11 +123,41 @@
       ],
       show_controls: false,
       show_tag_controls: false,
-      force_hide: false,
+      force_hide: true,
+      order: 5
+    },
+    {
+      title: 'Linux',
+      tags: [
+        {title: TagNames.ARCH, order: 6, force_hide: false, use_index: true},
+        {title: TagNames.UBUNTU, order: 8, force_hide: false, use_index: true},
+        {title: TagNames.DEBIAN, order: 10, force_hide: false, use_index: true},
+        {title: TagNames.WSL, order: 12, force_hide: false, use_index: true},
+        {title: "Rasperry Pi", order: 14, force_hide: false, use_index: true}
+      ],
+      show_controls: false,
+      show_tag_controls: false,
+      force_hide: true,
       order: 6
     },
     {
-      title: 'Data analysis / Visualization',
+      title: 'Environment/Tools',
+      tags: [
+        {title: "Linux (Arch, Debian, Ubuntu)", order: 2, force_hide: false, use_index: true},
+        {title: "vim", order: 4, force_hide: false, use_index: true},
+        {title: "regex", order: 3, force_hide: false, use_index: true},
+        {title: TagNames.DOCKER, order: 6, force_hide: false, use_index: true},
+        {title: "GNU Make", order: 7, force_hide: false, use_index: true},
+        {title: "CMake", order: 8, force_hide: false, use_index: true},
+        {title: TagNames.WSL, order: 10, force_hide: false, use_index: true}
+      ],
+      show_controls: false,
+      show_tag_controls: false,
+      force_hide: false,
+      order: 7
+    },
+    {
+      title: 'Data Analysis / Visualization',
       tags: [{title: TagNames.SPACY, order: 2, force_hide: false, use_index: true},
         {title: TagNames.NLTK, order: 4, force_hide: false, use_index: true},
         {title: TagNames.D3, order: 6, force_hide: false, use_index: true},
@@ -136,7 +166,8 @@
         {title: TagNames.PANDAS, order: 12, force_hide: false, use_index: true},
         {title: TagNames.DATA_ANALYSIS, order: 14, force_hide: true, use_index: true},
         {title: TagNames.DATA_VISUALIZATION, order: 16, force_hide: true, use_index: true},
-        {title: TagNames.NLP, order: 18, force_hide: true, use_index: true}
+        {title: TagNames.NLP, order: 18, force_hide: true, use_index: true},
+        {title: TagNames.MATLAB, order: 15, force_hide: false, use_index: true}
       ],
       show_controls: false,
       show_tag_controls: false,
@@ -158,10 +189,11 @@
     },
     {
       title: 'Coursework',
-      tags: [{title: 'Data Structures and Algorithms', order: 2, force_hide: false, use_index: false},
+      tags: [{title: 'Data Structures and Algorithms', order: 4, force_hide: false, use_index: false},
         { title: 'Real Time Operating Systems', order: 0, force_hide: false, use_index: false},
+        { title: 'Advanced Calculus', order: 1, force_hide: false, use_index: false},
         { title: 'Microprocessors', order: 4, force_hide: false, use_index: false},
-        { title: 'Digital Computation', order: 0, force_hide: false, use_index: false}],
+        { title: 'Digital Computation', order: 3, force_hide: false, use_index: false}],
       show_controls: false,
       show_tag_controls: false,
       force_hide: true,
@@ -345,7 +377,8 @@
 
   p{
     margin: 0;
-    font-weight: 200;
+    font-weight: 300;
+    color: #222222;
     /*font-size: 15px;*/ /* 15px set by store instead of hardcoded */
   }
   p.darktheme{

@@ -59,7 +59,12 @@ export let TagNames = {
   EMBEDDED: 'Embedded',
   SEQUELIZE: 'Sequelize',
   MONGODB: 'MongoDB',
-  VIMSCRIPT: 'Vimscript'
+  VIMSCRIPT: 'Vimscript',
+  VIM: 'vim',
+  ARCH: 'Arch',
+  UBUNTU: 'Ubuntu',
+  DEBIAN: 'Debian',
+  WSL: 'Windows Subsystem for Linux',
 }
 
 // For tags that are more categories than specific
