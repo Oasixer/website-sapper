@@ -4,6 +4,9 @@
   export let mobile;
   import { onMount, createEventDispatcher } from 'svelte';
   export let bg_color;
+  let width;
+  let wide;
+  $: wide = width?width>1000:false;
   
   let workElement;
   onMount(async => {
@@ -26,7 +29,6 @@
     padding: 60px 20px 60px 20px;
   }
 
-
   h1{
     font-size: 70px;
     text-transform: uppercase;
@@ -43,6 +45,8 @@
     margin-bottom: 7px;
   }
 </style>
+
+<svelte:window bind:outerWidth={width}/>
 
 <div id='workexperience'
   class:mobile
