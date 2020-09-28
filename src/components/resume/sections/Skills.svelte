@@ -102,9 +102,9 @@
     {
       title: 'Languages',
       tags: [{title: TagNames.PYTHON, order: 2, force_hide: false, use_index: true},
+        {title: TagNames.JS, order: 3, force_hide: false, use_index: true},
         {title: TagNames.CPP, order: 4, force_hide: false, use_index: true},
         {title: TagNames.C, order: 6, force_hide: false, use_index: true},
-        {title: TagNames.JS, order: 8, force_hide: false, use_index: true},
         {title: TagNames.ARDUINO, order: 10, force_hide: false, use_index: true},
         {title: TagNames.BASH, order: 12, force_hide: false, use_index: true},
         {title: TagNames.VIMSCRIPT, order: 14, force_hide: false, use_index: true},
@@ -114,32 +114,32 @@
       force_hide: false,
       order: 4
     },
-    {
-      title: 'Control Systems',
-      tags: [{title: TagNames.ROS, order: 2, force_hide: false, use_index: true},
-        {title: "Rasperry Pi (Embedded)", order: 4, force_hide: false, use_index: true},
-        {title: "Autonomous Pathfinding", order: 6, force_hide: false, use_index: true},
-        {title: "Image Processing/Object Detection in OpenCV", order: 8, force_hide: false, use_index: true}
-      ],
-      show_controls: false,
-      show_tag_controls: false,
-      force_hide: true,
-      order: 5
-    },
-    {
-      title: 'Linux',
-      tags: [
-        {title: TagNames.ARCH, order: 6, force_hide: false, use_index: true},
-        {title: TagNames.UBUNTU, order: 8, force_hide: false, use_index: true},
-        {title: TagNames.DEBIAN, order: 10, force_hide: false, use_index: true},
-        {title: TagNames.WSL, order: 12, force_hide: false, use_index: true},
-        {title: "Rasperry Pi", order: 14, force_hide: false, use_index: true}
-      ],
-      show_controls: false,
-      show_tag_controls: false,
-      force_hide: true,
-      order: 6
-    },
+    /* { */
+      /* title: 'Control Systems', */
+      /* tags: [{title: TagNames.ROS, order: 2, force_hide: false, use_index: true}, */
+        /* {title: "Rasperry Pi (Embedded)", order: 4, force_hide: false, use_index: true}, */
+        /* {title: "Autonomous Pathfinding", order: 6, force_hide: false, use_index: true}, */
+        /* {title: "Image Processing/Object Detection in OpenCV", order: 8, force_hide: false, use_index: true} */
+      /* ], */
+      /* show_controls: false, */
+      /* show_tag_controls: false, */
+      /* force_hide: true, */
+      /* order: 5 */
+    /* }, */
+    /* [> { <] */
+      /* title: 'Linux', */
+      /* tags: [ */
+        /* {title: TagNames.ARCH, order: 6, force_hide: false, use_index: true}, */
+        /* {title: TagNames.UBUNTU, order: 8, force_hide: false, use_index: true}, */
+        /* {title: TagNames.DEBIAN, order: 10, force_hide: false, use_index: true}, */
+        /* {title: TagNames.WSL, order: 12, force_hide: false, use_index: true}, */
+        /* {title: "Rasperry Pi", order: 14, force_hide: false, use_index: true} */
+      /* ], */
+      /* show_controls: false, */
+      /* show_tag_controls: false, */
+      /* force_hide: true, */
+      /* order: 6 */
+    /* }, */
     {
       title: 'Environment/Tools',
       tags: [
