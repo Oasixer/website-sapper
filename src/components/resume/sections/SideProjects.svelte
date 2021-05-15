@@ -45,11 +45,11 @@
     position: 'Project Lead',
     date: '2021',
     points: [{
-      title: 'Developed backend in Go implementing user login, jwt auth, GraphQL, unit tests',
+      title: 'Developed backend in Go implementing user login, JWT auth, GraphQL, unit tests',
       order: 2,
       force_hide: false
     }, {
-      title: 'Developed frontend in SvelteJS+Typescript+SCSS, leveraging GraphQL for communication',
+      title: 'Developed frontend in SvelteJS+Typescript+SCSS, leveraging local storage to store JWT & maintain sessions',
       order: 4,
       force_hide: false
     }],
@@ -67,6 +67,18 @@
     },
 		{
         title: TagNames.SVELTE,
+        order: 4,
+        force_hide: false,
+        use_index: true
+    },
+		{
+        title: TagNames.DOCKER,
+        order: 4,
+        force_hide: false,
+        use_index: true
+    },
+		{
+        title: TagNames.GCLOUD,
         order: 4,
         force_hide: false,
         use_index: true
