@@ -49,7 +49,7 @@
 		padding: 0;
 		width: 100vw;
 		max-width: 900px;
-		margin: 0 auto;
+		margin: 0 auto 0 40px;
 	}
 </style>
 

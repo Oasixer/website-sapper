@@ -73,7 +73,8 @@ export let TagNames = {
 	KUBERNETES: 'Kubernetes',
 	TYPESCRIPT: 'Typescript',
 	MATLAB: 'MATLAB',
-	JWT: 'JWT'
+	JWT: 'JWT',
+	AWK: 'Awk'
 }
 
 // For tags that are more categories than specific

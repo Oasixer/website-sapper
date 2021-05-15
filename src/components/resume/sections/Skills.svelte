@@ -113,6 +113,7 @@
         {title: TagNames.MATLAB, order: 14, force_hide: false, use_index: true},
         {title: TagNames.ASSEMBLY, order: 16, force_hide: false, use_index: true},
         {title: TagNames.VIMSCRIPT, order: 18, force_hide: false, use_index: true},
+        {title: TagNames.AWK, order: 20, force_hide: false, use_index: true},
       ],
       show_controls: false,
       show_tag_controls: false,

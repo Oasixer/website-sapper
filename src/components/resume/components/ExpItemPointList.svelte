@@ -27,7 +27,8 @@
   
   li.darktheme{
     color: #c0c0c0;
-    font-size: 14px;
+    font-size: 16px;
+		margin-left: 25px;
   }
   
   li:not(.darktheme){
