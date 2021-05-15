@@ -62,6 +62,7 @@
         {title: TagNames.NODEJS, order: 2, force_hide: false, use_index: true},
         {title: TagNames.KUBERNETES, order: 5, force_hide: false, use_index: true},
         {title: TagNames.POSTGRESQL, order: 6, force_hide: false, use_index: true},
+        {title: TagNames.GRAPHQL, order: 7, force_hide: false, use_index: true},
         {title: TagNames.SQLALCHEMY, order: 8, force_hide: false, use_index: true},
         {title: TagNames.SEQUELIZE, order: 8, force_hide: false, use_index: true},
         {title: TagNames.ORACLEDB, order: 12, force_hide: false, use_index: true},
