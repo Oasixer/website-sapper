@@ -58,6 +58,7 @@
     {
       title: 'Backend / Database',
       tags: [{title: TagNames.FLASK, order: 0, force_hide: false, use_index: true},
+        {title: TagNames.GOLANG, order: 1, force_hide: false, use_index: true},
         {title: TagNames.NODEJS, order: 2, force_hide: false, use_index: true},
         {title: TagNames.AWS, order: 4, force_hide: false, use_index: true},
         {title: TagNames.POSTGRESQL, order: 6, force_hide: false, use_index: true},
