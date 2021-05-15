@@ -60,11 +60,20 @@ export let TagNames = {
   SEQUELIZE: 'Sequelize',
   MONGODB: 'MongoDB',
   VIMSCRIPT: 'Vimscript',
-  VIM: 'vim',
+  VIM: 'Vim',
   ARCH: 'Arch',
   UBUNTU: 'Ubuntu',
   DEBIAN: 'Debian',
   WSL: 'Windows Subsystem for Linux',
+  GRAPHQL: 'GraphQL',
+  GRAFANA: 'Grafana',
+  SWAGGER: 'Swagger',
+  ASSEMBLY: 'Assembly',
+  GOLANG: 'Go',
+	KUBERNETES: 'Kubernetes',
+	TYPESCRIPT: 'Typescript',
+	MATLAB: 'MATLAB',
+	JWT: 'JWT'
 }
 
 // For tags that are more categories than specific

@@ -38,7 +38,45 @@
   let show_section_controls = false;
   let show_list_controls = false;
   let force_hide = false;
-  let items = [{
+		let items = [
+		{
+    title: 'GibJob - Resume App',
+    location: 'GibJob',
+    position: 'Project Lead',
+    date: '2021',
+    points: [{
+      title: 'Developed backend in Go implementing user login, jwt auth, GraphQL, unit tests',
+      order: 2,
+      force_hide: false
+    }, {
+      title: 'Developed frontend in SvelteJS+Typescript+SCSS, leveraging GraphQL for communication',
+      order: 4,
+      force_hide: false
+    }],
+    tags: [{
+        title: TagNames.GOLANG,
+        order: 2,
+        force_hide: false,
+        use_index: true
+    },
+    {
+        title: TagNames.GRAPHQL,
+        order: 4,
+        force_hide: false,
+        use_index: true
+    },
+		{
+        title: TagNames.SVELTE,
+        order: 4,
+        force_hide: false,
+        use_index: true
+    },
+    ],
+    force_hide: false,
+    order: -4
+  },
+		
+		{
     title: 'Vent Board Firmware',
     location: 'UW Rocketry - Electrical Team',
     position: 'Programmer',

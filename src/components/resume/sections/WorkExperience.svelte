@@ -46,17 +46,88 @@
   };
 
   let items = [{
+    title: 'Pronti Inc.',
+    location: 'Waterloo',
+    position: 'Backend/Infrastructure Engineer',
+    date: 'Jan-Apr 2021',
+			points: [{
+        title: 'Developed secure registration/login system with 2FA, JWTs for security, with a waitlist / referral system to control new user inflow',
+        order: 1,
+        force_hide: false
+      },
+			{
+        title: "Developed distributed microservice architecture to create scalable deployment on Kubernetes",
+        order: 2,
+        force_hide: false
+      },
+      {
+        title: 'Reduced critical service runtime by over 80% by optimizing SQL Queries',
+        order: 4,
+        force_hide: false
+      },
+      {
+        title: 'Led the development of a new flask app which processes and catalogs web content and provides a GraphQL interface',
+        order: 6,
+        force_hide: false
+      }],
+			tags: [{
+        title: TagNames.FLASK,
+        order: 0,
+        force_hide: false,
+        use_index: true
+      },
+      {
+        title: TagNames.PYTHON,
+        order: 2,
+        force_hide: false,
+        use_index: true
+      },
+      {
+        title: TagNames.GRAPHQL,
+        order: 4,
+        force_hide: false,
+        use_index: true
+      },
+      {
+        title: TagNames.AWS,
+        order: 6,
+        force_hide: false,
+        use_index: true
+      },
+      {
+        title: TagNames.KUBERNETES,
+        order: 8,
+        force_hide: false,
+        use_index: true
+      },
+      {
+        title: TagNames.POSTGRESQL,
+        order: 10,
+        force_hide: false,
+        use_index: true
+      },
+      {
+        title: TagNames.JWT,
+        order: 10,
+        force_hide: false,
+        use_index: true
+      },
+      {
+        title: TagNames.DOCKER,
+        order: 12,
+        force_hide: false,
+        use_index: true
+      }],
+    force_hide: false,
+    order: 2
+  },
+	{
     title: 'Backr Inc.',
     location: 'Toronto',
     position: 'Backend Developer',
     date: 'June-Sep 2020',
     points: [{
-        title: "Designed the companies' main Postgres db and schema, implemented with SQLAlchemy ORM",
-        order: 2,
-        force_hide: false
-      },
-      {
-        title: 'Designed and led a team to implement Flask server performing data ingestion 80% faster than previous model',
+        title: 'Designed and led a team to implement Flask server performing data ingestion',
         order: 4,
         force_hide: false
       },
@@ -66,7 +137,7 @@
         force_hide: false
       },
       {
-        title: 'Pioneered company wide DevOps procedures as Git integrated CI, comprehensive unit & integration testing, using Docker to containerize applications',
+				title: 'Deployed microservices to GCP and designed CI/CD pipelines',
         order: 10,
         force_hide: false
       }
@@ -106,14 +177,7 @@
         order: 10,
         force_hide: false,
         use_index: true
-      },
-      {
-        title: TagNames.DOCKER,
-        order: 12,
-        force_hide: false,
-        use_index: true
-      },
-      {
+      },{
         title: TagNames.NODEJS,
         order: 14,
         force_hide: false,
@@ -226,7 +290,7 @@
     order: 4
   },
   {
-    title: 'North Inc. (Formerly Thalmic Labs)',
+    title: 'North Inc. (Acquired by Google)',
     location: 'Waterloo',
     position: 'Computer Vision Software Developer',
     date: 'Jan-April 2019',

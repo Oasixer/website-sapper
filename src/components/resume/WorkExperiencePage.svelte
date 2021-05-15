@@ -44,6 +44,13 @@
     overflow-wrap: normal;
     margin-bottom: 7px;
   }
+	div#workExperienceWrap{
+		margin: 0;
+		padding: 0;
+		width: 100vw;
+		max-width: 900px;
+		margin: 0 auto;
+	}
 </style>
 
 <svelte:window bind:outerWidth={width}/>
@@ -54,5 +61,7 @@
   bind:this={workElement}
   bind:clientHeight={height}>
   <h1 class:mobile>Work Experience</h1>
-  <WorkExperience embedded={true} {mobile}/>
+	<div id='workExperienceWrap'>
+		<WorkExperience embedded={true} {mobile}/>
+	</div>
 </div>
