@@ -196,7 +196,6 @@
       title: 'Coursework',
       tags: [{title: 'Data Structures and Algorithms', order: 4, force_hide: false, use_index: false},
         { title: 'Real Time Operating Systems', order: 0, force_hide: false, use_index: false},
-        { title: 'Advanced Calculus', order: 1, force_hide: false, use_index: false},
         { title: 'Microprocessors', order: 4, force_hide: false, use_index: false},
         { title: 'Digital Computation', order: 3, force_hide: false, use_index: false}],
       show_controls: false,
